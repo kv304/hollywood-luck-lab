@@ -47,3 +47,16 @@ Official external media links are opt-in and open in a new tab. They do not auto
 - **C — Communicate results:** ask readers to explain the difference between gross, budget, probability, profit, and executive credit after a reveal. Record any causal claim they mistakenly infer.
 
 Use consent for any observational study. The product itself has no analytics or response upload. Connect these design choices to the specific assigned course readings in the final academic report. A causal claim about posters would require a properly designed randomized evaluation; the optional mode alone does not provide one.
+
+
+## Version 3 — One question, three scales
+
+The journey now connects a personal forecast to executive attribution, credited careers, and model evaluation. The hero strip names that route instead of repeating disconnected slogans. A completed slate links into the decision stories; story reveals lead into career exploration; film details lead to the model evidence. The visual palette is retained.
+
+Eight case files add company browsing, explicit role changes, and year-by-year chapters. “Reveal the next chapter” describes the action; “Reconsider my call” provides a useful next action. Company badges remain visible beside recognizable portraits. This applies temporal context to attribution and avoids using the release date as a proxy for a greenlight.
+
+Career charts let readers switch the same films between nominal reported gross and gross/budget. Data-derived summaries name the largest gross and largest multiple, rather than asserting that someone is underrated or overpaid. The five-film reel samples without replacement from observed credits: the same career can look different through selective evidence. No causal measure of luck or talent is claimed.
+
+Model explanations disclose single-feature sensitivity, earlier comparables, and unmatched metadata. They are optional during the game to manage information load. The data room starts with “56 out of 100 versus 49”, then separately checks whether confidence bands match outcomes. Brier scores, model selection, and a bootstrap interval that includes no gain appear in an expandable technical section. Measured improvement is modest; the design uses this uncertainty as part of the lab’s central question.
+
+A source snapshot and reproducible pipeline support the portfolio story. Final credits, budgets, and metadata were collected retrospectively; no prospective forecasting claim is justified. Poster-blind mode is a design affordance, not a randomized experiment. No user study has yet established persuasion, learning, or engagement gains.

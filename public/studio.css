@@ -10,3 +10,6 @@
 @media(max-width:1100px){.exec-portrait{width:52px;height:65px}}
 @media(max-width:850px){.exec-portrait{margin:auto}}
 @media(max-width:620px){.exec-portrait{width:48px;height:57px}}
+
+/* Explicit display heights override the poster HTML dimensions. */
+.summary-row>span:first-child{width:32px;height:48px;display:block;overflow:hidden}.summary-row img{display:block;width:32px;height:48px;object-fit:cover}.preview-art>img{height:auto;aspect-ratio:2/3;object-fit:cover}.exec-portrait{flex-shrink:0}.portrait-ross .exec-photo{object-position:50% 25%}

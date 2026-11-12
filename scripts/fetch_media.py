@@ -21,6 +21,14 @@ SUBJECTS = {
     'avengers': 'The_Avengers_(2012_film)',
     'sherry-lansing': 'Sherry_Lansing', 'brad-grey': 'Brad_Grey',
     'rich-ross': 'Rich_Ross', 'alan-horn': 'Alan_F._Horn',
+    'amy-pascal':'Amy_Pascal','tom-rothman':'Tom_Rothman','kevin-feige':'Kevin_Feige',
+    'robert-shaye':'Robert_Shaye','shonda-rhimes':'Shonda_Rhimes',
+    'steven-spielberg':'Steven_Spielberg','christopher-nolan':'Christopher_Nolan',
+    'tom-cruise':'Tom_Cruise','leonardo-dicaprio':'Leonardo_DiCaprio','meryl-streep':'Meryl_Streep',
+    'denzel-washington':'Denzel_Washington','julia-roberts':'Julia_Roberts','tom-hanks':'Tom_Hanks',
+    'alfred-hitchcock':'Alfred_Hitchcock','marilyn-monroe':'Marilyn_Monroe','james-stewart':'James_Stewart',
+    'jennifer-lawrence':'Jennifer_Lawrence','samuel-l-jackson':'Samuel_L._Jackson',
+    'greta-gerwig':'Greta_Gerwig','shah-rukh-khan':'Shah_Rukh_Khan','jackie-chan':'Jackie_Chan',
 }
 
 def main():

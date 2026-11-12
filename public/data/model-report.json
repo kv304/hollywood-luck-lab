@@ -666,5 +666,451 @@
         }
       ]
     }
+  },
+  "research": {
+    "source": "https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata",
+    "license": "TMDB terms; publisher labels Other (specified in description), NOT CC0.",
+    "catalogRows": 4802,
+    "matchedRows": 1564,
+    "matchedHoldout": 496,
+    "joinRule": "Unique normalized title and exact release year. Financial targets remain FiveThirtyEight values.",
+    "historyRule": "Strictly earlier release years only, frozen after 2008. Same-year films excluded.",
+    "selection": "Fit through 2004; choose minimum Brier error on 2005\u201308. Refit through 2008; evaluate once on 2009\u201313.",
+    "caveat": "Development already examined this historical test set for v2. This is not a pristine prospective external benchmark. Source metadata and budgets were assembled after release; release-month and final credits may not have been available at greenlight.",
+    "excludedFeatures": [
+      "gross",
+      "multiple",
+      "popularity",
+      "vote average",
+      "vote count",
+      "reviews",
+      "future credits",
+      "executive identity"
+    ],
+    "files": {
+      "tmdb-5000.zip": {
+        "url": "https://www.kaggle.com/api/v1/datasets/download/tmdb/tmdb-movie-metadata",
+        "retrieved": "2026-11-12",
+        "bytes": 9317430,
+        "sha256": "0342a9748128f44e6a58e96af19d918478af73a8976b142aa4e7e0aa3c50ef1b"
+      },
+      "tmdb-metadata.json": {
+        "url": "https://www.kaggle.com/api/v1/datasets/list?search=tmdb%20movie%20metadata",
+        "retrieved": "2026-11-12",
+        "bytes": 86486,
+        "sha256": "8616420a469189b8ff29517bca0183bbf29dd472b8e7f0a1269da7834853e492"
+      },
+      "tmdb-description.json": {
+        "url": "https://www.kaggle.com/api/v1/datasets/view/tmdb/tmdb-movie-metadata",
+        "retrieved": "2026-11-12",
+        "bytes": 14471,
+        "sha256": "96784a5b60c57c527bdb737895f1a883c24056be8d864fe8debaa991add7808e"
+      }
+    },
+    "probabilityConsistency": {
+      "method": "Equal-weight decreasing isotonic projection across 1\u00d7, 2.5\u00d7, and 5\u00d7, after independent model selection. No outcome is used in this step.",
+      "adjustedFilms": 11
+    }
+  },
+  "enhancedModels": {
+    "1.0": {
+      "name": "Forest (leaf 15)",
+      "validation": {
+        "Richer logistic (C=0.1)": {
+          "brier": 0.1575655071692822,
+          "logLoss": 0.4921342147354248,
+          "accuracy": 0.8045977011494253
+        },
+        "Richer logistic (C=1)": {
+          "brier": 0.158591598495118,
+          "logLoss": 0.4997952175461592,
+          "accuracy": 0.7988505747126436
+        },
+        "Forest (leaf 15)": {
+          "brier": 0.15400827981145152,
+          "logLoss": 0.4814371405490121,
+          "accuracy": 0.8017241379310345
+        },
+        "Forest (leaf 30)": {
+          "brier": 0.15402685991433868,
+          "logLoss": 0.4820809395573106,
+          "accuracy": 0.8017241379310345
+        },
+        "Boosted trees (depth 2)": {
+          "brier": 0.1542587347256809,
+          "logLoss": 0.48391138753556645,
+          "accuracy": 0.8017241379310345
+        },
+        "Boosted trees (depth 3)": {
+          "brier": 0.15461629035466454,
+          "logLoss": 0.48514025513021464,
+          "accuracy": 0.8017241379310345
+        }
+      },
+      "selectionTrain": 840,
+      "selectionValidation": 348,
+      "features": [
+        "Budget (log USD)",
+        "Release year",
+        "Metadata available",
+        "English language",
+        "Release month (sin)",
+        "Release month (cos)",
+        "Genre: Action",
+        "Genre: Adventure",
+        "Genre: Animation",
+        "Genre: Comedy",
+        "Genre: Crime",
+        "Genre: Documentary",
+        "Genre: Drama",
+        "Genre: Family",
+        "Genre: Fantasy",
+        "Genre: Foreign",
+        "Genre: History",
+        "Genre: Horror",
+        "Genre: Music",
+        "Genre: Mystery",
+        "Genre: Romance",
+        "Genre: Science Fiction",
+        "Genre: TV Movie",
+        "Genre: Thriller",
+        "Genre: War",
+        "Genre: Western",
+        "Director history",
+        "Director history coverage",
+        "Lead cast history",
+        "Lead cast history coverage",
+        "Production company history",
+        "Production company history coverage"
+      ],
+      "evaluation": {
+        "model": {
+          "brier": 0.1467864554122008,
+          "logLoss": 0.4665955987719048,
+          "accuracy": 0.8122676579925651
+        },
+        "legacy": {
+          "brier": 0.155591809987652,
+          "logLoss": 0.49193065086514887,
+          "accuracy": 0.8122676579925651
+        },
+        "baseline": {
+          "brier": 0.15250039446699354,
+          "logLoss": 0.4829560908004129,
+          "accuracy": 0.8122676579925651
+        }
+      },
+      "calibration": [
+        {
+          "low": 0.4,
+          "high": 0.6,
+          "n": 4,
+          "predicted": 0.5793688375,
+          "observed": 1.0
+        },
+        {
+          "low": 0.6,
+          "high": 0.8,
+          "n": 238,
+          "predicted": 0.7312389664285714,
+          "observed": 0.7142857142857143
+        },
+        {
+          "low": 0.8,
+          "high": 1.0,
+          "n": 296,
+          "predicted": 0.8783691954729729,
+          "observed": 0.8885135135135135
+        }
+      ],
+      "sensitivityMethod": "Change in predicted probability when one feature is replaced with its training median, holding other inputs fixed. Effects are not additive, causal, or uncertainty intervals.",
+      "rawEvaluation": {
+        "brier": 0.14696008530346918,
+        "logLoss": 0.466991167668701,
+        "accuracy": 0.8122676579925651
+      },
+      "pairedBootstrap": {
+        "metric": "Brier error improvement versus original; positive favors richer model",
+        "mean": 0.008805354630370764,
+        "low": 0.0029709758071371395,
+        "high": 0.014826334653854842,
+        "resamples": 2000,
+        "seed": 502,
+        "caveat": "Film-level resampling treats rows as independent; shared franchises and teams can violate this. It does not correct sample selection or development reuse."
+      }
+    },
+    "2.5": {
+      "name": "Richer logistic (C=0.1)",
+      "validation": {
+        "Richer logistic (C=0.1)": {
+          "brier": 0.23584565891547668,
+          "logLoss": 0.6672362204792504,
+          "accuracy": 0.5833333333333334
+        },
+        "Richer logistic (C=1)": {
+          "brier": 0.23695756177733318,
+          "logLoss": 0.674987905377184,
+          "accuracy": 0.5890804597701149
+        },
+        "Forest (leaf 15)": {
+          "brier": 0.23979910454273837,
+          "logLoss": 0.6725039187833928,
+          "accuracy": 0.5775862068965517
+        },
+        "Forest (leaf 30)": {
+          "brier": 0.24267564833323427,
+          "logLoss": 0.6782682969276325,
+          "accuracy": 0.5775862068965517
+        },
+        "Boosted trees (depth 2)": {
+          "brier": 0.2431214465668552,
+          "logLoss": 0.6789100838673198,
+          "accuracy": 0.5258620689655172
+        },
+        "Boosted trees (depth 3)": {
+          "brier": 0.24338714950421678,
+          "logLoss": 0.6794411073263175,
+          "accuracy": 0.5517241379310345
+        }
+      },
+      "selectionTrain": 840,
+      "selectionValidation": 348,
+      "features": [
+        "Budget (log USD)",
+        "Release year",
+        "Metadata available",
+        "English language",
+        "Release month (sin)",
+        "Release month (cos)",
+        "Genre: Action",
+        "Genre: Adventure",
+        "Genre: Animation",
+        "Genre: Comedy",
+        "Genre: Crime",
+        "Genre: Documentary",
+        "Genre: Drama",
+        "Genre: Family",
+        "Genre: Fantasy",
+        "Genre: Foreign",
+        "Genre: History",
+        "Genre: Horror",
+        "Genre: Music",
+        "Genre: Mystery",
+        "Genre: Romance",
+        "Genre: Science Fiction",
+        "Genre: TV Movie",
+        "Genre: Thriller",
+        "Genre: War",
+        "Genre: Western",
+        "Director history",
+        "Director history coverage",
+        "Lead cast history",
+        "Lead cast history coverage",
+        "Production company history",
+        "Production company history coverage"
+      ],
+      "evaluation": {
+        "model": {
+          "brier": 0.24718803792536603,
+          "logLoss": 0.6895775459768151,
+          "accuracy": 0.5613382899628253
+        },
+        "legacy": {
+          "brier": 0.2540057068006941,
+          "logLoss": 0.7012754983014744,
+          "accuracy": 0.4944237918215613
+        },
+        "baseline": {
+          "brier": 0.2542628037727733,
+          "logLoss": 0.7017021214437267,
+          "accuracy": 0.4758364312267658
+        }
+      },
+      "calibration": [
+        {
+          "low": 0.0,
+          "high": 0.2,
+          "n": 20,
+          "predicted": 0.151152629,
+          "observed": 0.4
+        },
+        {
+          "low": 0.2,
+          "high": 0.4,
+          "n": 115,
+          "predicted": 0.32685449191304344,
+          "observed": 0.41739130434782606
+        },
+        {
+          "low": 0.4,
+          "high": 0.6,
+          "n": 280,
+          "predicted": 0.49841664150000003,
+          "observed": 0.43214285714285716
+        },
+        {
+          "low": 0.6,
+          "high": 0.8,
+          "n": 118,
+          "predicted": 0.6643373328813559,
+          "observed": 0.6271186440677966
+        },
+        {
+          "low": 0.8,
+          "high": 1.0,
+          "n": 5,
+          "predicted": 0.824876042,
+          "observed": 1.0
+        }
+      ],
+      "sensitivityMethod": "Change in predicted probability when one feature is replaced with its training median, holding other inputs fixed. Effects are not additive, causal, or uncertainty intervals.",
+      "rawEvaluation": {
+        "brier": 0.2471205922166598,
+        "logLoss": 0.6894092507652035,
+        "accuracy": 0.5613382899628253
+      },
+      "pairedBootstrap": {
+        "metric": "Brier error improvement versus original; positive favors richer model",
+        "mean": 0.006817668916841441,
+        "low": -0.004596609061132068,
+        "high": 0.0185113144437301,
+        "resamples": 2000,
+        "seed": 502,
+        "caveat": "Film-level resampling treats rows as independent; shared franchises and teams can violate this. It does not correct sample selection or development reuse."
+      }
+    },
+    "5.0": {
+      "name": "Richer logistic (C=1)",
+      "validation": {
+        "Richer logistic (C=0.1)": {
+          "brier": 0.1515195832412267,
+          "logLoss": 0.4709838873686576,
+          "accuracy": 0.7902298850574713
+        },
+        "Richer logistic (C=1)": {
+          "brier": 0.1514071634017261,
+          "logLoss": 0.4705711006325956,
+          "accuracy": 0.7873563218390804
+        },
+        "Forest (leaf 15)": {
+          "brier": 0.15864387503135616,
+          "logLoss": 0.49295498760964895,
+          "accuracy": 0.7816091954022989
+        },
+        "Forest (leaf 30)": {
+          "brier": 0.15892701813178817,
+          "logLoss": 0.49261645223796596,
+          "accuracy": 0.7873563218390804
+        },
+        "Boosted trees (depth 2)": {
+          "brier": 0.15914289533346404,
+          "logLoss": 0.494082070100795,
+          "accuracy": 0.7988505747126436
+        },
+        "Boosted trees (depth 3)": {
+          "brier": 0.15963708757319692,
+          "logLoss": 0.4950064355175557,
+          "accuracy": 0.7787356321839081
+        }
+      },
+      "selectionTrain": 840,
+      "selectionValidation": 348,
+      "features": [
+        "Budget (log USD)",
+        "Release year",
+        "Metadata available",
+        "English language",
+        "Release month (sin)",
+        "Release month (cos)",
+        "Genre: Action",
+        "Genre: Adventure",
+        "Genre: Animation",
+        "Genre: Comedy",
+        "Genre: Crime",
+        "Genre: Documentary",
+        "Genre: Drama",
+        "Genre: Family",
+        "Genre: Fantasy",
+        "Genre: Foreign",
+        "Genre: History",
+        "Genre: Horror",
+        "Genre: Music",
+        "Genre: Mystery",
+        "Genre: Romance",
+        "Genre: Science Fiction",
+        "Genre: TV Movie",
+        "Genre: Thriller",
+        "Genre: War",
+        "Genre: Western",
+        "Director history",
+        "Director history coverage",
+        "Lead cast history",
+        "Lead cast history coverage",
+        "Production company history",
+        "Production company history coverage"
+      ],
+      "evaluation": {
+        "model": {
+          "brier": 0.15075937619581745,
+          "logLoss": 0.48006871508774124,
+          "accuracy": 0.8048327137546468
+        },
+        "legacy": {
+          "brier": 0.1509099366950117,
+          "logLoss": 0.47915527360311366,
+          "accuracy": 0.8122676579925651
+        },
+        "baseline": {
+          "brier": 0.16500234046201778,
+          "logLoss": 0.5143664456505077,
+          "accuracy": 0.8029739776951673
+        }
+      },
+      "calibration": [
+        {
+          "low": 0.0,
+          "high": 0.2,
+          "n": 352,
+          "predicted": 0.11532778960227272,
+          "observed": 0.14772727272727273
+        },
+        {
+          "low": 0.2,
+          "high": 0.4,
+          "n": 154,
+          "predicted": 0.2723363906493506,
+          "observed": 0.2727272727272727
+        },
+        {
+          "low": 0.4,
+          "high": 0.6,
+          "n": 26,
+          "predicted": 0.4753544719230769,
+          "observed": 0.34615384615384615
+        },
+        {
+          "low": 0.6,
+          "high": 0.8,
+          "n": 6,
+          "predicted": 0.6715624216666667,
+          "observed": 0.5
+        }
+      ],
+      "sensitivityMethod": "Change in predicted probability when one feature is replaced with its training median, holding other inputs fixed. Effects are not additive, causal, or uncertainty intervals.",
+      "rawEvaluation": {
+        "brier": 0.15079521525671585,
+        "logLoss": 0.4801392190533779,
+        "accuracy": 0.8048327137546468
+      },
+      "pairedBootstrap": {
+        "metric": "Brier error improvement versus original; positive favors richer model",
+        "mean": 0.00015056051090546344,
+        "low": -0.006099534715039254,
+        "high": 0.006621054095760638,
+        "resamples": 2000,
+        "seed": 502,
+        "caveat": "Film-level resampling treats rows as independent; shared franchises and teams can violate this. It does not correct sample selection or development reuse."
+      }
+    }
   }
 }

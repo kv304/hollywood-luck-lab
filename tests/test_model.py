@@ -37,13 +37,13 @@ class HistoricalModelChecks(unittest.TestCase):
             fitted = model_code.fit(self.train,threshold)
             saved = self.report['models'][str(threshold)]
             np.testing.assert_allclose(fitted['weights'],saved['weights'],atol=1e-10)
-            np.testing.assert_allclose(model_code.predict(saved,self.test),[r['probabilities'][str(threshold)] for r in self.test],atol=1e-8)
+            np.testing.assert_allclose(model_code.predict(saved,self.test),[r['legacyProbabilities'][str(threshold)] for r in self.test],atol=1e-8)
             self.assertTrue(all(0 < r['probabilities'][str(threshold)] < 1 for r in self.test))
 
     def test_metrics_and_cohorts_are_reproducible(self):
         for key, saved in self.report['models'].items():
             labels=[r['multiple']>=float(key) for r in self.test]
-            probabilities=[r['probabilities'][key] for r in self.test]
+            probabilities=[r['legacyProbabilities'][key] for r in self.test]
             self.assertAlmostEqual(model_code.metrics(labels,probabilities)['brier'],saved['evaluation']['model']['brier'],places=8)
             self.assertEqual(sum(r['n'] for r in saved['cohorts']),len(self.train))
             self.assertEqual(sum(r['n'] for r in saved['calibration']),len(self.test))

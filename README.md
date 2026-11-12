@@ -1,6 +1,6 @@
 # Hollywood Luck Lab
 
-An entertainment-focused COMM 502 prototype: five movie forecasts, an outcome reveal, real posters and executive portraits, historical case files, and an inspectable movie-data baseline. Runs as a static site with no API key, framework, account, or backend.
+An entertainment-focused COMM 502 prototype: five movie forecasts, an outcome reveal, real posters and executive portraits, eight historical case files, a browsable career dataset, and inspectable model comparisons. Runs as a static site with no API key, framework, account, or backend.
 
 ## Run
 
@@ -10,8 +10,9 @@ From this folder, serve `public` using `python3 -m http.server 8765 --bind 127.0
 
 - Five-movie curated forecast game, optional model help, outcome reveal, proper probability scoring, local best, replay, clipboard scorecard, and CSV export.
 - Poster-visible and poster-blind modes. Blind mode hides the current film's poster, title, and editorial label until the result; it is not randomized experimental assignment.
-- A searchable 538-film archive, with three target definitions (1×, 2.5×, 5× gross/budget), sorting, and a detail dialog comparing logistic, constant base-rate, and smoothed budget-cohort estimates.
-- Three executive dossiers with portraits, film posters, forecast-before-reveal timelines, and sources. These do not calculate executive skill or infer causal credit.
+- A searchable 538-film archive, with three target definitions (1×, 2.5×, 5× gross/budget), sorting, and a detail dialog comparing richer-context, constant base-rate, and smoothed budget-cohort estimates, plus model sensitivities and earlier comparable films.
+- Eight browsable executive/producer stories, company filters, portraits, year-by-year narrative reveals, and sources. Includes Paramount, Disney, Sony, Marvel, New Line/Warner, and Shondaland/Netflix. These do not calculate executive skill or infer causal credit.
+- A 2,671-person career explorer: search, actor/director and decade filters, gross/multiple charts, missing-value counts, data-derived standout comparisons, five-film highlight-reel shuffling, and a downloadable credited-film CSV. Selected 1916–2017 records, not complete careers.
 - Source notes, image attribution, model/audit downloads, sourced trivia, official media links, and an optional COMM 502 design rationale.
 - The original sandbox and case-file design at `public/classic/index.html`.
 
@@ -25,21 +26,28 @@ Of 1,794 input records, 51 share ambiguous financial signatures and 17 lack usab
 
 The standard target is reported worldwide gross ≥ 2.5× reported production budget. This is a comparison rule, not profit, break-even, ROI, artistic quality, or a universal definition of a hit. The archive also supports 1× and 5×. The source's `intgross` field is used as reported worldwide total, not added to domestic gross; named-film examples were cross-checked, but the full dataset is not independently financially audited.
 
-At 2.5×, holdout Brier error is **0.2540** for the budget/year model and **0.2543** for the constant training base rate; classification accuracy at 50% is **49.44%**. The UI discloses this near tie. No predictive superiority or executive ability claim is made. This is a retrospective analysis using archived, post-release financial data and selected sample coverage, not a point-in-time reconstruction of greenlight information.
+Version 3 enriches this unchanged financial sample using the publisher's TMDB 5000 snapshot: 4,802 dated films, 1,564 exact title/year metadata joins, including 496 of the 538 test films. Genre, release timing, language, and strictly earlier credited-film histories add context. Six candidates are compared on 2005–08, using a model fit through 2004 and validation history frozen at 2004. Winners are refit through 2008 and evaluated on 2009–13. Later gross, ratings, popularity, and future career results are excluded. A fixed decreasing projection across thresholds keeps the three target estimates coherent.
+
+At 2.5×, classification accuracy improves from **49.44% to 56.13%**; Brier error falls from **0.2540 to about 0.2472** after the consistency adjustment. This is a modest observed gain. A paired-bootstrap interval for the gain includes no improvement. The model remains poorly calibrated in some bands and misses recognizable hits. Model selection favors richer logistic regression over the tree challengers at this target; complexity alone is not the improvement. Full validation metrics, raw/adjusted results, calibration groups, and source hashes are in the report.
+
+Read `public/data/research-notes.md` for the full protocol, financial-source differences, licensing, explanations, and limitations. TMDB's publisher license is “Other (specified in description)” referring to TMDB terms, **not CC0**; FiveThirtyEight's CC BY license does not cover the added catalog or images. Career charts use the TMDB snapshot's financials; the game retains FiveThirtyEight's. Executive cases use their linked reporting. Do not silently combine those observation dates or gross definitions.
+
+Rebuild with an isolated Python environment using `requirements.txt`. Run `scripts/fetch_research.py` to download/extract the public publisher ZIP and save provenance, then `scripts/build_model.py`, `scripts/build_research.py`, and `scripts/build_people.py`, in that order. The raw CSVs are extracted from the tracked ZIP and ignored by Git to avoid duplicating the large credit source. There is no API key requirement. A Netflix bulk-viewing download failed with incomplete responses and is not used; TV currently appears in a sourced Shondaland case, not a comprehensive television career dataset.
 
 Scoring uses `100 * (1 - (forecast_probability - binary_outcome)^2)` per film. The five-film curated game is separate from full holdout evaluation. Prior knowledge, help, and repeated play can raise game scores. The budget cohort uses Beta(2,2) smoothing; its Wilson interval is for the raw cohort rate, not a per-film uncertainty interval.
 
 ## Verify
 
 - `python3 tests/test_model.py`: five checks for chronology, identity collisions, correct labels, reproducible fitting, exported predictions, and evaluation consistency. Requires NumPy.
-- `node tests/forecast.test.cjs`: verifies all 1,614 exported model probabilities independently in JavaScript; checks score endpoints, invalid inputs, shuffle, and Wilson intervals.
+- `node tests/forecast.test.cjs`: verifies all 1,614 legacy baseline probabilities independently in JavaScript; checks score endpoints, invalid inputs, shuffle, and Wilson intervals.
+- `.venv/bin/python tests/test_research.py`: independently refits selected richer models, verifies displayed metrics and explanation sensitivities, tests future-outcome exclusion and validation cutoffs, threshold ordering, earlier comparables, joins, and career aggregates.
 - `node tests/simulation.test.cjs`: checks the retained original sandbox's random streams and tie treatment.
 
 Browser QA covers a five-round run, model help, slider updates, scoring, replay, blind mode, export activation, archive search, changing targets, detail dialogs, executive dossier reveals, source panels, and a 390-pixel responsive layout. See the changelog for limitations.
 
 ## Media and attribution
 
-`scripts/fetch_sources.py --media` runs the media fetcher. Small poster references and executive portraits retain individual source pages and hashes; Commons portraits retain author/license metadata. Existing assets are reused, rate-limited requests back off, and missing thumbnails are not invented. The bundle has 18 poster references and three executive portraits.
+`scripts/fetch_sources.py --media` runs the media fetcher. Small poster references and executive portraits retain individual source pages and hashes; Commons portraits retain author/license metadata. Existing assets are reused, rate-limited requests back off, and missing thumbnails are not invented. The media manifest records each cached image or verified remote reference. `scripts/fetch_catalog_media.py` batches release-year-checked movie image mappings; `--cache-limit N` attempts N additional local copies and stops at a source rate limit. Cached artwork works offline; remaining source images load lazily and need a connection. Failed images display the title. Do not interpret a film page image as a certified original theatrical poster.
 
 Financial data: FiveThirtyEight, CC BY 4.0. Full license: `public/data/LICENSE-data.txt`. Poster artwork retains its respective copyrights. The D23 portrait credits Disney. Commons portraits credit John Mathew Smith / celebrity-photos.com (Lansing, CC BY-SA 2.0) and Angela George (Horn, CC BY-SA 3.0); visible credits link authors, licenses, and source file pages. Image rights are separate from the data license. Portraits are displayed with CSS crops; source files are unaltered. Media provenance: `public/assets/manifest.json`.
 

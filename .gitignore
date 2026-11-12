@@ -3,3 +3,6 @@ node_modules/
 artifacts/
 __pycache__/
 *.pyc
+.venv/
+data/raw/research/tmdb_5000_movies.csv
+data/raw/research/tmdb_5000_credits.csv

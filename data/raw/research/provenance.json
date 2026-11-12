@@ -1,0 +1,20 @@
+{
+  "tmdb-5000.zip": {
+    "url": "https://www.kaggle.com/api/v1/datasets/download/tmdb/tmdb-movie-metadata",
+    "retrieved": "2026-11-12",
+    "bytes": 9317430,
+    "sha256": "0342a9748128f44e6a58e96af19d918478af73a8976b142aa4e7e0aa3c50ef1b"
+  },
+  "tmdb-metadata.json": {
+    "url": "https://www.kaggle.com/api/v1/datasets/list?search=tmdb%20movie%20metadata",
+    "retrieved": "2026-11-12",
+    "bytes": 86486,
+    "sha256": "8616420a469189b8ff29517bca0183bbf29dd472b8e7f0a1269da7834853e492"
+  },
+  "tmdb-description.json": {
+    "url": "https://www.kaggle.com/api/v1/datasets/view/tmdb/tmdb-movie-metadata",
+    "retrieved": "2026-11-12",
+    "bytes": 14471,
+    "sha256": "96784a5b60c57c527bdb737895f1a883c24056be8d864fe8debaa991add7808e"
+  }
+}

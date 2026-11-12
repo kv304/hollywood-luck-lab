@@ -11,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / 'data/raw/movies.csv'
 
 def clean_rows():
-    rows = list(csv.DictReader(RAW.open()))
+    with RAW.open() as source:
+        rows = list(csv.DictReader(source))
     signatures = collections.Counter((r['budget'], r['domgross'], r['intgross']) for r in rows)
     usable, exclusions = [], []
     for row in rows:
@@ -75,7 +76,7 @@ def build():
         model['evaluation'] = {'model': metrics(actual, probabilities), 'baseline': metrics(actual, np.repeat(model['baseRate'], len(holdout)))}
         model['calibration'] = []
         for lower in [0., .2, .4, .6, .8]:
-            members = [i for i, p in enumerate(probabilities) if lower <= p < lower+.20000001]
+            members = [i for i, p in enumerate(probabilities) if lower <= p and (p < lower+.2 if lower < .8 else p <= 1)]
             if members:
                 model['calibration'].append({'low': lower, 'high': min(1, lower+.2), 'n': len(members), 'predicted': float(probabilities[members].mean()), 'observed': float(np.mean(np.array(actual)[members]))})
         model['cohorts'] = []
