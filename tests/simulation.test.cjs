@@ -1,0 +1,23 @@
+const assert = require('node:assert/strict');
+const { simulate, simulateMany, leaders } = require('../public/simulation.js');
+
+const opening = simulate(1627, 10, 0);
+assert.deepEqual(opening, simulate(1627, 10, 0), 'The seed must reproduce a history.');
+assert(opening.every(r => r.probability === .5 && r.outcomes.length === 10));
+assert(opening.every(r => r.hits === r.outcomes.reduce((a, b) => a + b, 0)));
+const extended = simulate(1627, 100, 0);
+opening.forEach((r, i) => assert.deepEqual(r.outcomes, extended[i].outcomes.slice(0, 10), 'Adding films must preserve earlier outcomes.'));
+const advantaged = simulate(1627, 10, .3);
+assert.equal(advantaged[0].probability, .8);
+assert(advantaged[0].hits >= opening[0].hits, 'A higher threshold with the same random draws cannot reduce Alex’s hits.');
+assert.deepEqual(advantaged.slice(1), opening.slice(1), 'Changing Alex’s advantage must leave other executives unchanged.');
+assert.throws(() => simulate(1, 0, 0), RangeError);
+assert.throws(() => simulate(1, 10, -.1), RangeError);
+assert.throws(() => simulate(1, 2.5, 0), RangeError);
+assert.equal(leaders([{ hits: 4 }, { hits: 4 }]).length, 2);
+const batch = simulateMany(1627, 10, 0, 1000);
+assert.equal(Object.values(batch.wins).reduce((a, b) => a + b, 0) + batch.ties, 1000, 'Each history must count exactly once, including ties.');
+assert(batch.ties > 0, 'An equal-ability batch should preserve tied leaders.');
+const stronger = simulateMany(1627, 100, .3, 1000);
+assert(stronger.wins.alex > 950, 'A large genuine advantage should usually be identifiable after 100 films.');
+console.log('Simulation checks passed. Opening records:', opening.map(r => `${r.name}: ${r.hits}/10`).join(', '));

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A hands-on experiment about luck, skill, and the stories we tell about success in Hollywood.">
+  <title>Hollywood Luck Lab — Who gets the green light?</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="cases.css">
+</head>
+<body>
+  <header class="site-header wrap">
+    <a class="wordmark" href="#" aria-label="Hollywood Luck Lab home"><span class="brand-mark" aria-hidden="true">H<span>∕</span>L</span><span>HOLLYWOOD<br><strong>LUCK LAB</strong></span></a>
+    <nav aria-label="Main navigation"><a href="#experiment">The experiment</a><a href="#case-files">Case files</a><a href="#model">The model <span aria-hidden="true">↗</span></a></nav>
+    <span class="edition">COMM 502 <span> / </span> EXPERIMENT 001</span>
+  </header>
+  <main>
+    <noscript><p class="wrap">Enable JavaScript to use the simulation and open the historical case files.</p></noscript>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy"><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> AN INTERACTIVE STUDIO EXPERIMENT</p>
+        <h1 id="hero-title">Who gets the<br><em>green light?</em></h1>
+        <p class="hero-intro">A hit streak. A confident headline. A reputation made.<br class="desktop-break"> How much can a track record really tell you?</p>
+        <a class="text-link" href="#experiment">Take the hiring chair <span aria-hidden="true">↓</span></a>
+      </div>
+      <aside class="brief" aria-label="Your assignment">
+        <div class="brief-top"><span>THE BRIEF</span><span aria-hidden="true">✳</span></div>
+        <h2>Your next slate <br>needs a leader.</h2>
+        <p>Four executives. Ten films each.<br>One hiring decision.</p>
+        <div class="brief-rule"></div>
+        <div class="brief-facts"><span>YOUR ROLE<strong>Studio chair</strong></span><span>TIME TO PLAY<strong>About 3 minutes</strong></span></div>
+        <p class="fiction-note">The opening hiring game uses fictional people and simulated outcomes.</p>
+      </aside>
+      <div class="hero-bottom"><span>SUCCESS HAS A STORY. LET’S LOOK AT THE NUMBERS.</span><span class="small-caps">01 — CHOOSE &nbsp; 02 — REVEAL &nbsp; 03 — EXPLORE</span></div>
+    </section>
+
+    <section id="experiment" class="experiment wrap" aria-labelledby="choice-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / MAKE THE CALL</p><h2 id="choice-title">Who would you hire?</h2></div><p>These are their last 10 films.<br>Choose the person you’d trust with the next slate.</p></div>
+      <div class="outcome-legend"><span><i class="hit-key"></i> Hit</span><span><i class="miss-key"></i> Miss</span><span class="legend-note">A hit is a binary outcome in this model, not a profit estimate.</span></div>
+      <div class="candidate-grid" id="candidates" role="group" aria-label="Choose an executive"></div>
+      <div class="decision-row" id="decision-row">
+        <div class="confidence-control"><label for="confidence">How confident are you in your choice? <output id="confidence-value" for="confidence">50%</output></label><input type="range" id="confidence" min="0" max="100" step="5" value="50"><div class="range-ends"><span>Still guessing</span><span>Very confident</span></div></div>
+        <div class="decision-action"><p id="choice-status" aria-live="polite">Select an executive to continue.</p><button id="hire" class="button primary" disabled>Make my hire <span aria-hidden="true">↗</span></button></div>
+      </div>
+    </section>
+
+    <section id="reveal" class="reveal-section" hidden aria-labelledby="reveal-title">
+      <div class="wrap reveal-inner">
+        <div class="reveal-story"><p class="eyebrow">02 / BEHIND THE RECORD</p><p id="hiring-recap" class="recap"></p><h2 id="reveal-title">Different records.<br>The same odds.</h2><p>In this opening scenario, every executive had a <strong>50% chance of a hit on every film.</strong> Their records differ because the outcomes were drawn randomly.</p><p>Your choice was based on the evidence you could see. The reveal shows what that evidence couldn’t tell you with certainty.</p><button id="open-lab" class="button light">Explore what changes <span aria-hidden="true">↓</span></button></div>
+        <div class="reveal-visual"><div class="visual-heading"><h3>The record vs. the model</h3><span>HIT RATE</span></div><div id="reveal-chart" class="comparison-chart"></div><div class="chart-axis"><span>0%</span><span>50%</span><span>100%</span></div><div class="chart-legend"><span><i class="observed-key"></i> Observed hit rate</span><span><i class="chance-key"></i> Underlying hit probability</span></div><p class="chart-footnote">The underlying probabilities are known because we set them in the simulation. They are not estimates of real executives’ abilities.</p></div>
+      </div>
+    </section>
+
+    <section id="lab" class="lab wrap" hidden aria-labelledby="lab-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / CHANGE THE WORLD</p><h2 id="lab-title">Put the story to the test.</h2></div><p>Give one executive an advantage.<br>See whether the record makes it obvious.</p></div>
+      <div class="lab-layout">
+        <aside class="controls" aria-label="Simulation controls">
+          <div class="control-block"><label for="films">Films per executive <output id="films-value">10</output></label><input id="films" type="range" min="5" max="100" step="5" value="10"><div class="range-ends"><span>5 films</span><span>100 films</span></div><p>More films give you more observations to work with.</p></div>
+          <div class="control-block"><label for="advantage">Alex’s underlying advantage <output id="advantage-value">0 pp</output></label><input id="advantage" type="range" min="0" max="30" step="5" value="0"><div class="range-ends"><span>Equal ability</span><span>+30 percentage points</span></div><p id="odds-description">Everyone has a 50% chance of a hit per film.</p></div>
+          <button id="replay" class="button primary">Replay this history <span aria-hidden="true">↻</span></button>
+          <p class="seed-note" id="seed-label"></p>
+        </aside>
+        <div class="lab-chart-panel"><div class="visual-heading"><h3>What you see vs. what we set</h3><span id="history-label">ONE SIMULATED HISTORY</span></div><div id="explore-chart" class="comparison-chart"></div><div class="chart-axis"><span>0%</span><span>50%</span><span>100%</span></div><div class="chart-legend"><span><i class="observed-key"></i> Observed hit rate</span><span><i class="chance-key"></i> Underlying hit probability</span></div><p id="history-summary" class="history-summary" aria-live="polite"></p></div>
+      </div>
+      <section class="many-histories" aria-labelledby="many-title"><div class="many-intro"><p class="eyebrow">ZOOM OUT</p><h3 id="many-title">One history is only one possibility.</h3><p>Run 1,000 independent histories with these settings. Who finishes alone in first—and how often is the lead a tie?</p><button id="batch" class="button secondary">Run 1,000 histories <span aria-hidden="true">↗</span></button></div><div id="batch-result" class="batch-result" aria-live="polite"><p class="batch-placeholder">A standout record can feel convincing.<br>Let’s see how often it repeats.</p></div></section>
+      <div class="lab-footer"><button id="export" class="text-button">Download simulated data <span aria-hidden="true">↓</span></button><button id="reset" class="text-button">Start a fresh hiring round <span aria-hidden="true">↺</span></button><span>Everything runs in your browser. No responses are uploaded.</span></div>
+    </section>
+
+    <section id="case-files" class="case-files wrap" aria-labelledby="case-title"></section>
+
+    <section id="model" class="model-section wrap" aria-labelledby="model-title"><div><p class="eyebrow">THE FINE PRINT, IN PLAIN ENGLISH</p><h2 id="model-title">A model you can question.</h2><p>This is a small experiment in interpreting evidence. Its assumptions are deliberately simple.</p></div><div class="model-details">
+      <details><summary>What exactly is being simulated?</summary><p>Each film is an independent hit-or-miss draw. The opening round gives all four executives a hit probability of 50%. In the lab, Alex’s probability can rise to 80%; everyone else stays at 50%. “Ability” refers only to that assigned probability. Budgets, genres, collaborators, and market conditions are held outside the model.</p></details>
+      <details><summary>What changes when I move a slider?</summary><p>Within a history, each executive has a reproducible stream of random numbers. Adding films extends the same stream; changing Alex’s advantage changes the threshold for a hit. “Replay” draws a new history. The 1,000-history comparison uses separate random draws with the selected settings. A tie is counted separately, not awarded to an arbitrary executive.</p></details>
+      <details><summary>What can—and can’t—I conclude?</summary><p>You can investigate how track records vary under these assumptions and how sample size helps distinguish a true difference. You cannot conclude that real executives are equally skilled or that Hollywood success is entirely random. A result after several hits is not guaranteed to reverse: every new film is still an independent draw in this model.</p></details>
+      <details><summary>How does this connect to communication?</summary><p>The opening task invites a judgment before showing how the data was made. The reveal makes the limits of a short track record visible. The lab lets you compare observed outcomes with underlying probabilities. These design choices explore representativeness, overconfidence, framing, and selective attention from COMM 502. This prototype does not establish that users exhibit a bias or that it changes their understanding; that requires separate evaluation.</p></details>
+    </div></section>
+  </main>
+  <footer class="site-footer wrap"><span>HOLLYWOOD LUCK LAB</span><span>A COMM 502 design experiment · Prototype 01</span><span>Simulated histories · Sourced case files · Real questions.</span></footer>
+  <div id="announcement" class="sr-only" aria-live="polite"></div>
+  <script src="simulation.js"></script>
+  <script src="app.js"></script>
+  <script src="cases.js"></script>
+</body>
+</html>
