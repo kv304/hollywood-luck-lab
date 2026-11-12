@@ -30,6 +30,10 @@ Validation: five original Python model checks, four new research checks with ind
 
 Limits: retrospectively assembled, selected historical records; final credits and release timing may not have been known at greenlight; test-set reuse during development; incomplete finances and careers; gross is not profit. The TV expansion currently consists of a sourced Shondaland/Netflix story, not a complete TV performance dataset. Some remote artwork requires a network connection or can fall back to titles. No causal attribution, prospective forecasting performance, or engagement-study result is claimed.
 
+## v0.3.1 — Make visible career comparisons legible
+
+Scale career-chart bars to the films currently shown and label that scale. Previously an early-career outlier could shrink every bar in the latest-12 view even though that outlier was not visible. Showing all films restores the full-career scale. This changes presentation only; records, aggregates, probabilities, and model metrics are unchanged. Saved separately from v0.3.0.
+
 ## Restore or inspect a version
 
 Every working milestone receives a Git tag and a ZIP. To inspect without replacing current work, extract the desired ZIP into a separate folder and serve its `public` directory. To restore a milestone into a new Git branch after saving current changes, use `git switch -c restore-v0.1.0 v0.1.0`. Do not use a hard reset. The version selector in the site links the playable original; ZIP files preserve the exact full source of each milestone.
