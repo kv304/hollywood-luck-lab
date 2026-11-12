@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { simulate, simulateMany, leaders } = require('../public/simulation.js');
+const { simulate, simulateMany, leaders } = require('../public/classic/simulation.js');
 
 const opening = simulate(1627, 10, 0);
 assert.deepEqual(opening, simulate(1627, 10, 0), 'The seed must reproduce a history.');

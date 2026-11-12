@@ -1,43 +1,50 @@
 # Hollywood Luck Lab
 
-A self-contained COMM 502 prototype about interpreting track records. No framework, database, API key, or model download is required.
+An entertainment-focused COMM 502 prototype: five movie forecasts, an outcome reveal, real posters and executive portraits, historical case files, and an inspectable movie-data baseline. Runs as a static site with no API key, framework, account, or backend.
 
-## Try it
+## Run
 
-Open `public/index.html` in a browser, or serve the public folder with any static web server. For example, from this directory: `python3 -m http.server 8765 --bind 127.0.0.1 --directory public`.
+From this folder, serve `public` using `python3 -m http.server 8765 --bind 127.0.0.1 --directory public`, then visit `http://127.0.0.1:8765/`. Opening `public/index.html` directly also works because the runtime data is bundled as JavaScript. Google Fonts is optional; local system fonts provide fallbacks. Official reading/trailer links open externally.
 
-The path through the prototype is choose an executive, record confidence, reveal the assigned probabilities, and explore other histories. All computation runs in the browser. No responses are uploaded or retained after reload. The data-export button downloads a CSV containing the opening round, current scenario, and 1,000 histories if calculated.
+## What is playable
 
-## Model
+- Five-movie curated forecast game, optional model help, outcome reveal, proper probability scoring, local best, replay, clipboard scorecard, and CSV export.
+- Poster-visible and poster-blind modes. Blind mode hides the current film's poster, title, and editorial label until the result; it is not randomized experimental assignment.
+- A searchable 538-film archive, with three target definitions (1×, 2.5×, 5× gross/budget), sorting, and a detail dialog comparing logistic, constant base-rate, and smoothed budget-cohort estimates.
+- Three executive dossiers with portraits, film posters, forecast-before-reveal timelines, and sources. These do not calculate executive skill or infer causal credit.
+- Source notes, image attribution, model/audit downloads, sourced trivia, official media links, and an optional COMM 502 design rationale.
+- The original sandbox and case-file design at `public/classic/index.html`.
 
-Four fictional executives each generate independent Bernoulli film outcomes. In the opening round their probabilities are all 0.5. In exploration Alex can receive a 0–0.30 probability advantage while all other probabilities remain 0.5. An integer seed reproduces each history. Changing the number of films preserves its prefix of random draws. Changing the advantage reuses those draws to isolate the parameter change. “Replay” changes the seed.
+## Real data and model
 
-The batch comparison counts sole leaders and ties separately. It does not break ties by array order. Batch percentages are Monte Carlo estimates under the specified model, not estimates of real executive ability or evidence about participant behavior.
+`scripts/fetch_sources.py` downloads the publisher's FiveThirtyEight CSV, README, and license, recording source URLs and SHA-256 hashes. The unauthenticated GitHub metadata API was rate limited, so the upstream commit is explicitly null; the stored bytes and hash identify this snapshot. The data is archived, not live scraped box office.
+
+`scripts/build_model.py` uses NumPy to clean the data, fit regularized logistic baselines, and emit browser-ready records and an evaluation report. It does not require scikit-learn. Run with a Python environment containing NumPy to rebuild.
+
+Of 1,794 input records, 51 share ambiguous financial signatures and 17 lack usable financial values. All 68 are excluded, including potentially correct members of duplicate groups. This catches the Avengers and Frozen title collisions without inventing corrections. The retained 1,726 films span 1970–2013: 1,188 through 2008 train the model, and 538 from 2009–2013 form the temporal holdout. Features are log nominal production budget and year. Revenue, Bechdel label, awards, posters, title, ratings, and executive identity are excluded from features.
+
+The standard target is reported worldwide gross ≥ 2.5× reported production budget. This is a comparison rule, not profit, break-even, ROI, artistic quality, or a universal definition of a hit. The archive also supports 1× and 5×. The source's `intgross` field is used as reported worldwide total, not added to domestic gross; named-film examples were cross-checked, but the full dataset is not independently financially audited.
+
+At 2.5×, holdout Brier error is **0.2540** for the budget/year model and **0.2543** for the constant training base rate; classification accuracy at 50% is **49.44%**. The UI discloses this near tie. No predictive superiority or executive ability claim is made. This is a retrospective analysis using archived, post-release financial data and selected sample coverage, not a point-in-time reconstruction of greenlight information.
+
+Scoring uses `100 * (1 - (forecast_probability - binary_outcome)^2)` per film. The five-film curated game is separate from full holdout evaluation. Prior knowledge, help, and repeated play can raise game scores. The budget cohort uses Beta(2,2) smoothing; its Wilson interval is for the raw cohort rate, not a per-film uncertainty interval.
 
 ## Verify
 
-Run `node tests/simulation.test.cjs`. Tests cover reproducibility, nested film histories, the intervention on Alex only, input validation, honest tie handling, and a large-sample sanity check.
+- `python3 tests/test_model.py`: five checks for chronology, identity collisions, correct labels, reproducible fitting, exported predictions, and evaluation consistency. Requires NumPy.
+- `node tests/forecast.test.cjs`: verifies all 1,614 exported model probabilities independently in JavaScript; checks score endpoints, invalid inputs, shuffle, and Wilson intervals.
+- `node tests/simulation.test.cjs`: checks the retained original sandbox's random streams and tie treatment.
 
-## COMM 502 design rationale
+Browser QA covers a five-round run, model help, slider updates, scoring, replay, blind mode, export activation, archive search, changing targets, detail dialogs, executive dossier reveals, source panels, and a 390-pixel responsive layout. See the changelog for limitations.
 
-| Professor’s criterion | Design decision | Intended mechanism to evaluate |
-| --- | --- | --- |
-| Attract engagement | A short hiring brief and a concrete first decision | Personal relevance and an achievable task |
-| Support interaction | Four initial options; advanced controls appear after the reveal | Selective attention and staged information |
-| Support understanding | Common 0–100% scales, labels, and distinct marks for outcomes and probabilities | Comparable visual evidence and explicit uncertainty about inference |
-| Encourage reflection | Confidence recorded before the reveal; the original record remains visible | Inspecting the basis of a judgment without labeling the participant biased |
-| Avoid an oversimplified lesson | Add a genuine skill difference and increase observations | Show when track records can reveal a real difference |
+## Media and attribution
 
-These are design hypotheses. No usability or learning study has been conducted. The prototype should be evaluated against the assigned course sources before making claims about psychological effects.
+`scripts/fetch_sources.py --media` runs the media fetcher. Small poster references and executive portraits retain individual source pages and hashes; Commons portraits retain author/license metadata. Existing assets are reused, rate-limited requests back off, and missing thumbnails are not invented. The bundle has 18 poster references and three executive portraits.
 
-## Real-world case files
+Financial data: FiveThirtyEight, CC BY 4.0. Full license: `public/data/LICENSE-data.txt`. Poster artwork retains its respective copyrights. The D23 portrait credits Disney. Commons portraits credit John Mathew Smith / celebrity-photos.com (Lansing, CC BY-SA 2.0) and Angela George (Horn, CC BY-SA 3.0); visible credits link authors, licenses, and source file pages. Image rights are separate from the data license. Portraits are displayed with CSS crops; source files are unaltered. Media provenance: `public/assets/manifest.json`.
 
-Three curated historical cases add a forecast-before-reveal interaction: Lansing → Grey at Paramount, Ross at Disney, and Horn with the Disney leadership team. Each separates information available at the stated date from later outcomes and links the underlying reporting or company documents. Visitors retain their own Likely/Unlikely/Need more evidence judgment on each case during the current page session. The cases deliberately include delayed slate attribution, an unmade project, and sustained success as a counterweight to an all-luck explanation.
+No responses or analytics are uploaded. Only the best score is retained in this browser's local storage, when available, with a clear-score control. Calls, dossier choices, and active rounds stay in memory and clear on reload. Clipboard sharing occurs only on the explicit copy button.
 
-These are selected illustrations, not a representative sample, a causal estimate, or a validated forecasting test. Do not infer hiring quality from the answers. Lansing’s announcement is described as a planned departure; Ross’s is described as stepping down. Neither is relabeled a firing. McG’s specific halted Captain Nemo production is distinguished from other adaptations; its unrealized box office is unknown, not zero. Grosses are rounded US dollars and are not studio receipts or profit. Company accounts of successful leadership are attributed to the company, not treated as independent causal evidence.
+## Versions and design evidence
 
-Case research checked November 12, 2026. Core sources: Box Office Mojo’s November 1, 2004 Lansing announcement and 2005 worldwide grosses; UPI’s August 12, 2004 War of the Worlds report; The Guardian’s January 7, 2005 Grey appointment; TheWrap’s April 20, 2012 Ross departure; Disney’s February 17, 2011 investor transcript and May 8, 2012 earnings; The Numbers’ Avengers release/gross record; ComingSoon’s November 17, 2009 Nemo report; ABC’s May 31, 2012 Horn appointment; Disney’s May 1, 2019 co-chair announcement. Exact links are in `public/cases.js` and the visible source accordions. This independently researched extension does not reproduce or claim to verify the book’s exact wording.
-
-## Possible next steps
-
-Observe a few readers using the challenge, record confusion and navigation issues with their consent, revise the wording, and add a small learning reflection. The final progress report can explain the shift from a general learning blog to this interactive article. Add class citations to the final academic report.
+`CHANGELOG.md` records tagged checkpoints, ZIP snapshots, and nondestructive restore instructions. Version 1 remains playable, with Git history and a source ZIP. `DESIGN_NOTES.md` records entertainment references, dated reach evidence, the COMM 502 A/B/C mapping, data limits, and proposed user evaluation. These design references inform hypotheses; their popularity is not proof that this UI improves learning.

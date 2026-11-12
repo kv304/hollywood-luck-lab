@@ -1,83 +1,62 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="A hands-on experiment about luck, skill, and the stories we tell about success in Hollywood.">
-  <title>Hollywood Luck Lab — Who gets the green light?</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="cases.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Five movies. One studio chair. Test your box-office instincts against a real-data baseline, then open Hollywood’s executive case files.">
+  <meta name="theme-color" content="#271245"><title>Hollywood Luck Lab — Can you call the hits?</title>
+  <link rel="stylesheet" href="studio.css">
 </head>
 <body>
-  <header class="site-header wrap">
-    <a class="wordmark" href="#" aria-label="Hollywood Luck Lab home"><span class="brand-mark" aria-hidden="true">H<span>∕</span>L</span><span>HOLLYWOOD<br><strong>LUCK LAB</strong></span></a>
-    <nav aria-label="Main navigation"><a href="#experiment">The experiment</a><a href="#case-files">Case files</a><a href="#model">The model <span aria-hidden="true">↗</span></a></nav>
-    <span class="edition">COMM 502 <span> / </span> EXPERIMENT 001</span>
-  </header>
+  <a class="skip-link" href="#play">Skip to the game</a>
+  <header class="topbar"><div class="wrap topbar-inner">
+    <a class="brand" href="#" aria-label="Hollywood Luck Lab home"><span class="brand-icon" aria-hidden="true">✳</span><span>HOLLYWOOD<strong>LUCK LAB<span class="brand-dot">.</span></strong></span></a>
+    <nav aria-label="Main navigation"><a href="#play">Play the slate</a><a href="#case-files">Exec files</a><a href="#data-room">The data room</a></nav>
+    <a class="version-link" href="classic/index.html" title="Open the saved original prototype">V2 <span>↗ V1</span></a>
+  </div></header>
   <main>
-    <noscript><p class="wrap">Enable JavaScript to use the simulation and open the historical case files.</p></noscript>
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-copy"><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> AN INTERACTIVE STUDIO EXPERIMENT</p>
-        <h1 id="hero-title">Who gets the<br><em>green light?</em></h1>
-        <p class="hero-intro">A hit streak. A confident headline. A reputation made.<br class="desktop-break"> How much can a track record really tell you?</p>
-        <a class="text-link" href="#experiment">Take the hiring chair <span aria-hidden="true">↓</span></a>
+    <noscript><p class="wrap">Enable JavaScript to play. The <a href="data/model-report.json">model report</a> is available as a standalone file.</p></noscript>
+    <section class="hero" aria-labelledby="hero-title"><div class="hero-grain" aria-hidden="true"></div><div class="wrap hero-inner">
+      <div class="hero-copy"><p class="kicker"><span class="on-air" aria-hidden="true"></span> MOVIE INSTINCTS. MEET THE NUMBERS.</p>
+        <h1 id="hero-title">You’ve seen<br> the movies.<br> <span>Can you call<br class="mobile-only"> the hits?</span></h1>
+        <p class="hero-description">Take the studio chair. Call five box-office outcomes.<br class="desktop-only"> Find out what your gut—and the data—get right.</p>
+        <div class="hero-actions"><button class="button hot" data-start>Play your slate <span aria-hidden="true">↗</span></button><a href="#case-files" class="hero-secondary">Go behind the headlines <span aria-hidden="true">→</span></a></div>
+        <div class="hero-meta"><span>✦ &nbsp;5 movies</span><span>◷ &nbsp;About 2 minutes</span><span>◈ &nbsp;Real historical data</span></div>
       </div>
-      <aside class="brief" aria-label="Your assignment">
-        <div class="brief-top"><span>THE BRIEF</span><span aria-hidden="true">✳</span></div>
-        <h2>Your next slate <br>needs a leader.</h2>
-        <p>Four executives. Ten films each.<br>One hiring decision.</p>
-        <div class="brief-rule"></div>
-        <div class="brief-facts"><span>YOUR ROLE<strong>Studio chair</strong></span><span>TIME TO PLAY<strong>About 3 minutes</strong></span></div>
-        <p class="fiction-note">The opening hiring game uses fictional people and simulated outcomes.</p>
-      </aside>
-      <div class="hero-bottom"><span>SUCCESS HAS A STORY. LET’S LOOK AT THE NUMBERS.</span><span class="small-caps">01 — CHOOSE &nbsp; 02 — REVEAL &nbsp; 03 — EXPLORE</span></div>
+      <div class="hero-art" aria-label="A selection of films featured in the lab"><div class="art-orbit" aria-hidden="true"></div><div class="poster-stack" id="hero-posters"></div><div class="art-sticker"><span aria-hidden="true">★</span> GOOD TASTE.<br> GOOD FORECAST?<small>LET’S FIND OUT.</small></div><div class="art-caption">A love letter to movies.<br> A reality check for the stories around them.</div></div>
+    </div><div class="marquee" aria-hidden="true"><div>BIG HITS <b>✳</b> BAD CALLS <b>✳</b> LUCKY BREAKS <b>✳</b> REAL DATA <b>✳</b> BIG HITS <b>✳</b> BAD CALLS <b>✳</b> LUCKY BREAKS <b>✳</b> REAL DATA <b>✳</b></div></div></section>
+
+    <section id="play" class="play-section wrap" aria-labelledby="play-title"><div class="section-heading"><div><p class="eyebrow"><span class="section-number coral">01</span> THE BOX-OFFICE CHALLENGE</p><h2 id="play-title">Your slate. Your call.</h2></div><p>A poster. A budget. A probability.<br> Then we roll the actual numbers.</p></div><div id="game"></div></section>
+
+    <section class="interlude wrap" aria-label="The central question"><span aria-hidden="true">✳</span><p>A great movie. A great investment.<br> <em>Not always the same story.</em></p><a href="#data-room">See what we actually measure <span aria-hidden="true">↘</span></a></section>
+
+    <section id="case-files" class="dossier-section" aria-labelledby="dossier-title"><div class="wrap"><div class="section-heading"><div><p class="eyebrow"><span class="section-number yellow">02</span> THE EXECUTIVE FILES</p><h2 id="dossier-title">New boss. Old slate.<br> <em>Who gets the credit?</em></h2></div><p>The headlines have a main character.<br> The production timeline is more complicated.</p></div><div id="dossiers"></div></div></section>
+
+    <section id="backlot" class="backlot wrap" aria-labelledby="backlot-title"><div class="section-heading"><div><p class="eyebrow"><span class="section-number mint">03</span> THE BACKLOT</p><h2 id="backlot-title">Go down the movie rabbit hole.</h2></div><p>Explore <span data-holdout-count>538</span> held-out films.<br> Change the yardstick. Watch the story change.</p></div>
+      <div class="explorer-tools"><label class="search-field"><span class="sr-only">Search the movie archive</span><span aria-hidden="true">⌕</span><input id="movie-search" type="search" placeholder="Try Inception, Moneyball, or a film you love…" autocomplete="off"></label><label class="select-field">The mark<select id="explore-threshold"><option value="1.0">1× production budget</option><option value="2.5" selected>2.5× production budget</option><option value="5.0">5× production budget</option></select></label><label class="select-field">Sort by<select id="explore-sort"><option value="featured">Featured picks</option><option value="probability">Model probability</option><option value="multiple">Actual gross multiple</option><option value="year">Newest first</option></select></label></div>
+      <div class="explorer-meta"><p id="explore-count" aria-live="polite"></p><span>Archived figures · 2009–2013 · not current box office</span></div><div id="movie-grid" class="movie-grid"></div><button id="show-more" class="button outline">Show more movies <span aria-hidden="true">↓</span></button>
     </section>
 
-    <section id="experiment" class="experiment wrap" aria-labelledby="choice-title">
-      <div class="section-heading"><div><p class="eyebrow">01 / MAKE THE CALL</p><h2 id="choice-title">Who would you hire?</h2></div><p>These are their last 10 films.<br>Choose the person you’d trust with the next slate.</p></div>
-      <div class="outcome-legend"><span><i class="hit-key"></i> Hit</span><span><i class="miss-key"></i> Miss</span><span class="legend-note">A hit is a binary outcome in this model, not a profit estimate.</span></div>
-      <div class="candidate-grid" id="candidates" role="group" aria-label="Choose an executive"></div>
-      <div class="decision-row" id="decision-row">
-        <div class="confidence-control"><label for="confidence">How confident are you in your choice? <output id="confidence-value" for="confidence">50%</output></label><input type="range" id="confidence" min="0" max="100" step="5" value="50"><div class="range-ends"><span>Still guessing</span><span>Very confident</span></div></div>
-        <div class="decision-action"><p id="choice-status" aria-live="polite">Select an executive to continue.</p><button id="hire" class="button primary" disabled>Make my hire <span aria-hidden="true">↗</span></button></div>
+    <section id="data-room" class="data-room" aria-labelledby="data-title"><div class="wrap"><div class="section-heading"><div><p class="eyebrow"><span class="section-number lavender">04</span> THE DATA ROOM</p><h2 id="data-title">Tiny model.<br> <em>Real limits.</em></h2></div><p>The probability comes from records, not a dial.<br> Open the hood. Keep your skepticism.</p></div><div id="data-summary"></div>
+      <div class="data-accordions">
+        <details><summary>What is a “hit” in this game?</summary><p>The game asks whether reported worldwide theatrical gross reached <strong>2.5× reported production budget</strong>. This is an adjustable comparison rule, not an industry definition of profit or break-even. Theater shares, marketing, financing, taxes, and later revenue are absent. The backlot lets you try 1× and 5× too.</p></details>
+        <details><summary>Where does the data come from—and what was removed?</summary><p>We use the financial columns of <a href="https://github.com/fivethirtyeight/data/tree/master/bechdel" target="_blank" rel="noopener noreferrer">FiveThirtyEight’s publicly released Bechdel dataset</a>, originally assembled for a different research question. It is a selected historical sample, not a census of films. Bechdel labels are not model inputs. Of 1,794 records, 51 shared ambiguous financial signatures and 17 lacked usable financial fields. We exclude these 68 rows instead of silently correcting them.</p><p>The source labels one field <code>intgross</code>; its values for cross-checked films are worldwide totals. We use it as reported worldwide gross and do not add domestic gross again. The downloaded snapshot, checksums, and exclusion report are preserved. Other errors can remain.</p></details>
+        <details><summary>How is the probability calculated?</summary><p>A regularized logistic regression uses log production budget and release year. Training uses 1,188 films from 1970–2008; evaluation uses 538 different films from 2009–2013. Neither later gross nor ratings, awards, posters, or executive identity enters the model. A constant training-set base rate and a smoothed budget-band estimate provide comparisons.</p><p>This is a retrospective backtest using an archived dataset. Budgets and historical grosses were collected after release, so it is not proof of what a forecaster could have known on an actual greenlight date. It is not a modern release predictor or a measure of executive skill.</p></details>
+        <details><summary>What do my points mean?</summary><p>Each forecast earns <code>100 × [1 − (probability − outcome)²]</code> points. Outcome is 1 when the film clears the mark, 0 otherwise. The five-film maximum is 500. This rewards useful probabilities and makes confident misses costly. Five curated, recognizable films cannot establish your general forecasting ability; memory of an outcome can help. The full 538-film evaluation is reported separately.</p><p>The poster-blind option invites a comparison of judgments. It does not randomly assign participants or establish that images cause a change. Best scores are saved only in this browser when storage is available; nothing is uploaded. <button id="clear-local" class="inline-button">Clear my saved score</button></p></details>
+        <details><summary>How does this fulfill COMM 502’s design brief?</summary><p><strong>Engage:</strong> a familiar movie, a concrete decision, and an achievable five-round loop invite participation. <strong>Interact:</strong> one decision at a time, an optional evidence reveal, and a visible progress strip manage attention and control. <strong>Understand:</strong> the original forecast stays next to the outcome; budgets and grosses get different labels; executive timelines separate attribution from timing.</p><p>These choices explore framing, prior knowledge, representativeness, motivation, and attribution. They are design hypotheses to connect to the assigned course readings and evaluate with users—not findings that the prototype has already proved.</p></details>
       </div>
-    </section>
+      <div class="data-downloads"><a href="data/model-report.json" download>Download model & audit report ↓</a><a href="data/movies.json" download>Download held-out films ↓</a><a href="classic/index.html">Open the original simulation ↗</a></div>
+    </div></section>
 
-    <section id="reveal" class="reveal-section" hidden aria-labelledby="reveal-title">
-      <div class="wrap reveal-inner">
-        <div class="reveal-story"><p class="eyebrow">02 / BEHIND THE RECORD</p><p id="hiring-recap" class="recap"></p><h2 id="reveal-title">Different records.<br>The same odds.</h2><p>In this opening scenario, every executive had a <strong>50% chance of a hit on every film.</strong> Their records differ because the outcomes were drawn randomly.</p><p>Your choice was based on the evidence you could see. The reveal shows what that evidence couldn’t tell you with certainty.</p><button id="open-lab" class="button light">Explore what changes <span aria-hidden="true">↓</span></button></div>
-        <div class="reveal-visual"><div class="visual-heading"><h3>The record vs. the model</h3><span>HIT RATE</span></div><div id="reveal-chart" class="comparison-chart"></div><div class="chart-axis"><span>0%</span><span>50%</span><span>100%</span></div><div class="chart-legend"><span><i class="observed-key"></i> Observed hit rate</span><span><i class="chance-key"></i> Underlying hit probability</span></div><p class="chart-footnote">The underlying probabilities are known because we set them in the simulation. They are not estimates of real executives’ abilities.</p></div>
-      </div>
-    </section>
-
-    <section id="lab" class="lab wrap" hidden aria-labelledby="lab-title">
-      <div class="section-heading"><div><p class="eyebrow">03 / CHANGE THE WORLD</p><h2 id="lab-title">Put the story to the test.</h2></div><p>Give one executive an advantage.<br>See whether the record makes it obvious.</p></div>
-      <div class="lab-layout">
-        <aside class="controls" aria-label="Simulation controls">
-          <div class="control-block"><label for="films">Films per executive <output id="films-value">10</output></label><input id="films" type="range" min="5" max="100" step="5" value="10"><div class="range-ends"><span>5 films</span><span>100 films</span></div><p>More films give you more observations to work with.</p></div>
-          <div class="control-block"><label for="advantage">Alex’s underlying advantage <output id="advantage-value">0 pp</output></label><input id="advantage" type="range" min="0" max="30" step="5" value="0"><div class="range-ends"><span>Equal ability</span><span>+30 percentage points</span></div><p id="odds-description">Everyone has a 50% chance of a hit per film.</p></div>
-          <button id="replay" class="button primary">Replay this history <span aria-hidden="true">↻</span></button>
-          <p class="seed-note" id="seed-label"></p>
-        </aside>
-        <div class="lab-chart-panel"><div class="visual-heading"><h3>What you see vs. what we set</h3><span id="history-label">ONE SIMULATED HISTORY</span></div><div id="explore-chart" class="comparison-chart"></div><div class="chart-axis"><span>0%</span><span>50%</span><span>100%</span></div><div class="chart-legend"><span><i class="observed-key"></i> Observed hit rate</span><span><i class="chance-key"></i> Underlying hit probability</span></div><p id="history-summary" class="history-summary" aria-live="polite"></p></div>
-      </div>
-      <section class="many-histories" aria-labelledby="many-title"><div class="many-intro"><p class="eyebrow">ZOOM OUT</p><h3 id="many-title">One history is only one possibility.</h3><p>Run 1,000 independent histories with these settings. Who finishes alone in first—and how often is the lead a tie?</p><button id="batch" class="button secondary">Run 1,000 histories <span aria-hidden="true">↗</span></button></div><div id="batch-result" class="batch-result" aria-live="polite"><p class="batch-placeholder">A standout record can feel convincing.<br>Let’s see how often it repeats.</p></div></section>
-      <div class="lab-footer"><button id="export" class="text-button">Download simulated data <span aria-hidden="true">↓</span></button><button id="reset" class="text-button">Start a fresh hiring round <span aria-hidden="true">↺</span></button><span>Everything runs in your browser. No responses are uploaded.</span></div>
-    </section>
-
-    <section id="case-files" class="case-files wrap" aria-labelledby="case-title"></section>
-
-    <section id="model" class="model-section wrap" aria-labelledby="model-title"><div><p class="eyebrow">THE FINE PRINT, IN PLAIN ENGLISH</p><h2 id="model-title">A model you can question.</h2><p>This is a small experiment in interpreting evidence. Its assumptions are deliberately simple.</p></div><div class="model-details">
-      <details><summary>What exactly is being simulated?</summary><p>Each film is an independent hit-or-miss draw. The opening round gives all four executives a hit probability of 50%. In the lab, Alex’s probability can rise to 80%; everyone else stays at 50%. “Ability” refers only to that assigned probability. Budgets, genres, collaborators, and market conditions are held outside the model.</p></details>
-      <details><summary>What changes when I move a slider?</summary><p>Within a history, each executive has a reproducible stream of random numbers. Adding films extends the same stream; changing Alex’s advantage changes the threshold for a hit. “Replay” draws a new history. The 1,000-history comparison uses separate random draws with the selected settings. A tie is counted separately, not awarded to an arbitrary executive.</p></details>
-      <details><summary>What can—and can’t—I conclude?</summary><p>You can investigate how track records vary under these assumptions and how sample size helps distinguish a true difference. You cannot conclude that real executives are equally skilled or that Hollywood success is entirely random. A result after several hits is not guaranteed to reverse: every new film is still an independent draw in this model.</p></details>
-      <details><summary>How does this connect to communication?</summary><p>The opening task invites a judgment before showing how the data was made. The reveal makes the limits of a short track record visible. The lab lets you compare observed outcomes with underlying probabilities. These design choices explore representativeness, overconfidence, framing, and selective attention from COMM 502. This prototype does not establish that users exhibit a bias or that it changes their understanding; that requires separate evaluation.</p></details>
+    <section class="watch-next wrap" aria-labelledby="watch-title"><div class="section-heading"><div><p class="eyebrow">KEEP THE CURIOSITY GOING</p><h2 id="watch-title">For your next rabbit hole.</h2></div><p>Three ways to look at the same industry.</p></div><div class="reading-grid">
+      <a class="reading-card purple-card" href="https://pudding.cool/2017/03/film-dialogue/" target="_blank" rel="noopener noreferrer"><span>THE PUDDING <b>↗</b></span><h3>Who actually<br> gets to talk?</h3><p>Explore dialogue across 2,000 screenplays.</p><small>Interactive essay · representation & measurement</small></a>
+      <a class="reading-card orange-card" href="https://video.disney.com/john-carter" target="_blank" rel="noopener noreferrer"><span>DISNEY VIDEO <b>↗</b></span><h3>The pitch<br> before the verdict.</h3><p>Watch the John Carter trailers and clips.</p><small>Official media · framing & expectations</small></a>
+      <a class="reading-card mint-card" href="https://www.oscars.org/events/deconstructing-gravity" target="_blank" rel="noopener noreferrer"><span>THE ACADEMY <b>↗</b></span><h3>Movie magic<br> is engineering.</h3><p>How Gravity’s filmmakers built the illusion.</p><small>Production story · craft beyond the gross</small></a>
     </div></section>
   </main>
-  <footer class="site-footer wrap"><span>HOLLYWOOD LUCK LAB</span><span>A COMM 502 design experiment · Prototype 01</span><span>Simulated histories · Sourced case files · Real questions.</span></footer>
-  <div id="announcement" class="sr-only" aria-live="polite"></div>
-  <script src="simulation.js"></script>
-  <script src="app.js"></script>
-  <script src="cases.js"></script>
-</body>
-</html>
+  <footer class="footer"><div class="wrap"><div class="footer-top"><a class="brand" href="#"><span class="brand-icon" aria-hidden="true">✳</span><span>HOLLYWOOD<strong>LUCK LAB.</strong></span></a><p>For the love of movies.<br> And a little less certainty.</p><div><a href="classic/index.html">Saved version 1 ↗</a><span>COMM 502 · Prototype v0.2.0</span></div></div>
+    <details class="credits"><summary>Sources, image credits & design references</summary><div id="credits-content"></div></details><p class="footer-note">An educational prototype. Historical figures, not live box office. No accounts. No uploaded responses. Data © FiveThirtyEight, CC BY 4.0. Movie artwork belongs to its respective rights holders.</p>
+  </div></footer>
+  <dialog id="movie-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Close movie details">×</button><div id="dialog-content"></div></dialog>
+  <div id="status" class="sr-only" role="status" aria-live="polite"></div>
+  <script src="data/model-data.js"></script><script src="assets/manifest.js"></script><script src="editorial.js"></script><script src="forecast.js"></script><script src="cases.js"></script><script src="studio.js"></script>
+</body></html>

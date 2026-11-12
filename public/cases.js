@@ -65,34 +65,5 @@
       ]
     }
   ];
-  const host = document.getElementById('case-files');
-  const forecasts = {};
-  let current = cases[0].id;
-  let revealed = new Set();
-  function render() {
-    const item = cases.find(c => c.id === current);
-    const open = revealed.has(current);
-    host.innerHTML = `<div class="section-heading"><div><p class="eyebrow">04 / REAL-WORLD CASE FILES</p><h2 id="case-title">Now give reality a turn.</h2></div><p>Make a forecast. Open the timeline.<br>Revisit who deserves the credit—or blame.</p></div>
-      <p class="case-intro">Inspired by the questions about success and randomness in Leonard Mlodinow’s <em>The Drunkard’s Walk</em>. These independently sourced cases test different interpretations; they are not a reproduction of the book’s accounts.</p>
-      <div class="case-picker" role="group" aria-label="Select a real-world case">${cases.map(c => `<button class="case-tab ${c.id === current ? 'active' : ''}" data-case="${c.id}" aria-pressed="${c.id === current}"><span>CASE ${c.number} / ${c.studio}</span><strong>${c.name}</strong><small>${c.lens}</small></button>`).join('')}</div>
-      <article class="case-panel" aria-labelledby="case-name"><div class="case-brief"><p class="eyebrow">${item.date}</p><h3 id="case-name">${item.name}</h3><p>${item.known}</p><fieldset ${open ? 'disabled' : ''}><legend>${item.question}</legend><div class="forecast-options">${['Likely', 'Unlikely', 'Need more evidence'].map(v => `<label class="forecast-option"><input type="radio" name="forecast" value="${v}" ${forecasts[current] === v ? 'checked' : ''}>${v}</label>`).join('')}</div></fieldset><button class="button primary" id="reveal-case" ${open || !forecasts[current] ? 'disabled' : ''}>${open ? 'Timeline opened ✓' : 'Lock forecast & open timeline ↗'}</button><p class="case-note">A retrospective exercise: prior knowledge may influence your answer. Your choice stays in this tab only.</p></div>
-      <div class="case-evidence">${open ? `<p class="forecast-recap">YOUR FORECAST: <strong>${forecasts[current]}</strong><br>DOCUMENTED OUTCOME: ${item.event}</p><ol class="case-timeline">${item.timeline.map(([date, title, text]) => `<li><time>${date}</time><h4>${title}</h4><p>${text}</p></li>`).join('')}</ol><div class="case-takeaway"><p class="eyebrow">WHAT THE EVIDENCE ALLOWS</p><p>${item.lesson}</p></div><details class="case-sources"><summary>Check the sources (${item.sources.length})</summary><ul>${item.sources.map(([title, url]) => `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${title} ↗</a></li>`).join('')}</ul></details>` : `<div class="sealed-file"><span aria-hidden="true">↳</span><p>Tomorrow’s results.<br>Today’s judgment.</p><small>Make your forecast to open the file.</small></div>`}</div></article>
-      <p class="case-limits"><strong>Read the sample honestly.</strong> These selected cases are illustrative contrasts, not a representative dataset or a test of forecasting skill. Gross box office is not studio revenue or profit. A halted project has an unobserved counterfactual, not a zero-dollar flop. These timelines cannot establish whether hiring or replacing an executive caused a result.</p>`;
-    host.querySelectorAll('[data-case]').forEach(button => button.addEventListener('click', () => {
-      current = button.dataset.case; render();
-      host.querySelector(`[data-case="${current}"]`).focus({ preventScroll: true });
-    }));
-    host.querySelectorAll('input[name="forecast"]').forEach(input => input.addEventListener('change', () => {
-      forecasts[current] = input.value;
-      document.getElementById('reveal-case').disabled = false;
-    }));
-    document.getElementById('reveal-case').addEventListener('click', () => {
-      if (!forecasts[current] || revealed.has(current)) return;
-      revealed.add(current); render();
-      const recap = host.querySelector('.forecast-recap');
-      recap.setAttribute('tabindex', '-1'); recap.focus({ preventScroll: true });
-      document.getElementById('announcement').textContent = `${item.name} timeline opened. ${item.event}`;
-    });
-  }
-  render();
+  window.HistoricalCases = cases;
 })();

@@ -27,6 +27,19 @@ def main():
     ASSETS.mkdir(parents=True, exist_ok=True)
     manifest_path = ASSETS / 'manifest.json'
     manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    # D23 provides the portrait used with its own executive biography.
+    if 'rich-ross' not in manifest:
+        url = 'https://d23.com/app/uploads/2015/07/ross-rich-1180x600-1180x600.jpg'
+        try:
+            raw = fetch(url)
+            (ASSETS/'rich-ross.jpg').write_bytes(raw)
+            manifest['rich-ross'] = {'path':'assets/rich-ross.jpg','page':'https://d23.com/a-to-z/ross-rich/',
+                'url':url,'filePage':'https://d23.com/a-to-z/ross-rich/','title':'Rich Ross',
+                'kind':'press_photo','credit':'Photo © Disney / D23; source: Disney’s executive biography.',
+                'retrieved':'2026-11-12','sha256':hashlib.sha256(raw).hexdigest()}
+            print('rich-ross official D23 portrait',len(raw))
+        except Exception as error:
+            print('UNAVAILABLE rich-ross official portrait',str(error))
     for slug, title in SUBJECTS.items():
         if slug in manifest and (ROOT/'public'/manifest[slug]['path']).exists():
             continue
