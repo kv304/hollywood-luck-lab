@@ -1,0 +1,670 @@
+{
+  "retrieved": "2026-11-12",
+  "snapshotPeriod": "1970\u20132013",
+  "publisher": "FiveThirtyEight",
+  "source": "https://github.com/fivethirtyeight/data/tree/master/bechdel",
+  "license": "CC BY 4.0",
+  "rawSha256": "69310a39f8b318450d48cd08a7060de37a5185ca1870ce4194418e2092d392c4",
+  "rawRows": 1794,
+  "cleanRows": 1726,
+  "excludedRows": 68,
+  "exclusionReasons": {
+    "repeated_financial_signature_possible_identity_collision": 51,
+    "missing_or_nonpositive_financial_value": 17
+  },
+  "train": {
+    "n": 1188,
+    "minYear": 1970,
+    "maxYear": 2008
+  },
+  "holdout": {
+    "n": 538,
+    "minYear": 2009,
+    "maxYear": 2013
+  },
+  "features": [
+    "log nominal production budget in USD",
+    "release year"
+  ],
+  "target": "reported worldwide theatrical gross / production budget meets selected threshold",
+  "financialField": "Upstream intgross is used as total worldwide gross, not added to domgross. Checked against named-film examples; this snapshot is not a complete financial audit.",
+  "exclusions": [
+    {
+      "id": "tt1559547",
+      "title": "Beautiful Creatures",
+      "year": 2013,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1939659",
+      "title": "Carrie",
+      "year": 2013,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt2294629",
+      "title": "Frozen",
+      "year": 2013,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt2005374",
+      "title": "The Frozen Ground",
+      "year": 2013,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt1517260",
+      "title": "The Host",
+      "year": 2013,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt2243973",
+      "title": "Hannibal",
+      "year": 2012,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1656190",
+      "title": "Safe",
+      "year": 2012,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1876451",
+      "title": "Sparkle",
+      "year": 2012,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0848228",
+      "title": "The Avengers",
+      "year": 2012,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1386703",
+      "title": "Total Recall",
+      "year": 2012,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1422136",
+      "title": "A Lonely Place to Die",
+      "year": 2011,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0816462",
+      "title": "Conan the Barbarian",
+      "year": 2011,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1701990",
+      "title": "Detention",
+      "year": 2011,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0822847",
+      "title": "Priest",
+      "year": 2011,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0999913",
+      "title": "Straw Dogs",
+      "year": 2011,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1568346",
+      "title": "The Girl with the Dragon Tattoo",
+      "year": 2011,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1323045",
+      "title": "Frozen",
+      "year": 2010,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0775489",
+      "title": "The Illusionist",
+      "year": 2010,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1155076",
+      "title": "The Karate Kid",
+      "year": 2010,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1216520",
+      "title": "Womb",
+      "year": 2010,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0758746",
+      "title": "Friday the 13th",
+      "year": 2009,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1132620",
+      "title": "The Girl with the Dragon Tattoo",
+      "year": 2009,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt1068678",
+      "title": "Veronika Decides to Die",
+      "year": 2009,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0448182",
+      "title": "Yesterday Was a Lie",
+      "year": 2009,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0489018",
+      "title": "Day of the Dead",
+      "year": 2008,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0942903",
+      "title": "Stargate: The Ark of Truth",
+      "year": 2008,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0882978",
+      "title": "Three Kingdoms: Resurrection of the Dragon",
+      "year": 2008,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt1038988",
+      "title": "[Rec]",
+      "year": 2007,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0373883",
+      "title": "Halloween",
+      "year": 2007,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0756683",
+      "title": "The Man from Earth",
+      "year": 2007,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0496436",
+      "title": "White Noise 2: The Light",
+      "year": 2007,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0416496",
+      "title": "Bandidas",
+      "year": 2006,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0454082",
+      "title": "Black Christmas",
+      "year": 2006,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0490166",
+      "title": "London To Brighton",
+      "year": 2006,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0468492",
+      "title": "The Host",
+      "year": 2006,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0443543",
+      "title": "The Illusionist",
+      "year": 2006,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0398712",
+      "title": "Assault on Precinct 13",
+      "year": 2005,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0414387",
+      "title": "Pride and Prejudice",
+      "year": 2005,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0384806",
+      "title": "The Amityville Horror",
+      "year": 2005,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0432291",
+      "title": "The Fog",
+      "year": 2005,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0363547",
+      "title": "Dawn of the Dead",
+      "year": 2004,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0366920",
+      "title": "Pride and Prejudice",
+      "year": 2003,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0319970",
+      "title": "Carrie",
+      "year": 2002,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0212985",
+      "title": "Hannibal",
+      "year": 2001,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0221889",
+      "title": "Beautiful Creatures",
+      "year": 2000,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0142032",
+      "title": "Dune",
+      "year": 2000,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0118661",
+      "title": "The Avengers",
+      "year": 1998,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0112130",
+      "title": "Pride and Prejudice",
+      "year": 1995,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0114323",
+      "title": "Safe",
+      "year": 1995,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0110889",
+      "title": "Priest",
+      "year": 1994,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0100802",
+      "title": "Total Recall",
+      "year": 1990,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0088993",
+      "title": "Day of the Dead",
+      "year": 1985,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0091578",
+      "title": "My Beautiful Laundrette",
+      "year": 1985,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0087182",
+      "title": "Dune",
+      "year": 1984,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0087538",
+      "title": "The Karate Kid",
+      "year": 1984,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0082198",
+      "title": "Conan the Barbarian",
+      "year": 1982,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0080761",
+      "title": "Friday the 13th",
+      "year": 1980,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0080749",
+      "title": "The Fog",
+      "year": 1980,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0078767",
+      "title": "The Amityville Horror",
+      "year": 1979,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0077402",
+      "title": "Dawn of the Dead",
+      "year": 1978,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0077651",
+      "title": "Halloween",
+      "year": 1978,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0074156",
+      "title": "Assault on Precinct 13",
+      "year": 1976,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0075249",
+      "title": "Sparkle",
+      "year": 1976,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0071222",
+      "title": "Black Christmas",
+      "year": 1974,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0072271",
+      "title": "The Texas Chain Saw Massacre",
+      "year": 1974,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0072308",
+      "title": "The Towering Inferno",
+      "year": 1974,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    },
+    {
+      "id": "tt0068156",
+      "title": "1776",
+      "year": 1972,
+      "reason": "missing_or_nonpositive_financial_value"
+    },
+    {
+      "id": "tt0067800",
+      "title": "Straw Dogs",
+      "year": 1971,
+      "reason": "repeated_financial_signature_possible_identity_collision"
+    }
+  ],
+  "models": {
+    "1.0": {
+      "mean": [
+        16.866268014390887,
+        1998.9680134680134
+      ],
+      "scale": [
+        1.4197212458947353,
+        8.141777395098321
+      ],
+      "weights": [
+        1.4994095838591217,
+        -0.03036851195469136,
+        -0.18908051500219722
+      ],
+      "baseRate": 0.8156565656565656,
+      "threshold": 1.0,
+      "evaluation": {
+        "model": {
+          "brier": 0.155591809987652,
+          "logLoss": 0.49193065086514887,
+          "accuracy": 0.8122676579925651
+        },
+        "baseline": {
+          "brier": 0.15250039446699354,
+          "logLoss": 0.4829560908004129,
+          "accuracy": 0.8122676579925651
+        }
+      },
+      "calibration": [
+        {
+          "low": 0.6,
+          "high": 0.8,
+          "n": 538,
+          "predicted": 0.7715358385118759,
+          "observed": 0.8122676579925651
+        }
+      ],
+      "cohorts": [
+        {
+          "label": "Under $20m",
+          "low": 0,
+          "high": 20000000,
+          "n": 459,
+          "hits": 378,
+          "probability": 0.8207343412526998
+        },
+        {
+          "label": "$20m\u2013$75m",
+          "low": 20000000,
+          "high": 75000000,
+          "n": 524,
+          "hits": 414,
+          "probability": 0.7878787878787878
+        },
+        {
+          "label": "$75m+",
+          "low": 75000000,
+          "high": null,
+          "n": 205,
+          "hits": 177,
+          "probability": 0.8564593301435407
+        }
+      ]
+    },
+    "2.5": {
+      "mean": [
+        16.866268014390887,
+        1998.9680134680134
+      ],
+      "scale": [
+        1.4197212458947353,
+        8.141777395098321
+      ],
+      "weights": [
+        0.19030682022354217,
+        -0.2389321462280081,
+        -0.17968628973426973
+      ],
+      "baseRate": 0.5454545454545454,
+      "threshold": 2.5,
+      "evaluation": {
+        "model": {
+          "brier": 0.2540057068006941,
+          "logLoss": 0.7012754983014744,
+          "accuracy": 0.4944237918215613
+        },
+        "baseline": {
+          "brier": 0.2542628037727733,
+          "logLoss": 0.7017021214437267,
+          "accuracy": 0.4758364312267658
+        }
+      },
+      "calibration": [
+        {
+          "low": 0.2,
+          "high": 0.4,
+          "n": 54,
+          "predicted": 0.3869087943404479,
+          "observed": 0.5
+        },
+        {
+          "low": 0.4,
+          "high": 0.6000000000000001,
+          "n": 465,
+          "predicted": 0.4722590281949585,
+          "observed": 0.4645161290322581
+        },
+        {
+          "low": 0.6,
+          "high": 0.8,
+          "n": 19,
+          "predicted": 0.6373133646868298,
+          "observed": 0.6842105263157895
+        }
+      ],
+      "cohorts": [
+        {
+          "label": "Under $20m",
+          "low": 0,
+          "high": 20000000,
+          "n": 459,
+          "hits": 283,
+          "probability": 0.6155507559395248
+        },
+        {
+          "label": "$20m\u2013$75m",
+          "low": 20000000,
+          "high": 75000000,
+          "n": 524,
+          "hits": 255,
+          "probability": 0.48674242424242425
+        },
+        {
+          "label": "$75m+",
+          "low": 75000000,
+          "high": null,
+          "n": 205,
+          "hits": 110,
+          "probability": 0.5358851674641149
+        }
+      ]
+    },
+    "5.0": {
+      "mean": [
+        16.866268014390887,
+        1998.9680134680134
+      ],
+      "scale": [
+        1.4197212458947353,
+        8.141777395098321
+      ],
+      "weights": [
+        -1.0278130555999383,
+        -0.5605812101023495,
+        -0.31113440571685574
+      ],
+      "baseRate": 0.27946127946127947,
+      "threshold": 5.0,
+      "evaluation": {
+        "model": {
+          "brier": 0.1509099366950117,
+          "logLoss": 0.47915527360311366,
+          "accuracy": 0.8122676579925651
+        },
+        "baseline": {
+          "brier": 0.16500234046201778,
+          "logLoss": 0.5143664456505077,
+          "accuracy": 0.8029739776951673
+        }
+      },
+      "calibration": [
+        {
+          "low": 0.0,
+          "high": 0.2,
+          "n": 382,
+          "predicted": 0.13624414115696776,
+          "observed": 0.1518324607329843
+        },
+        {
+          "low": 0.2,
+          "high": 0.4,
+          "n": 135,
+          "predicted": 0.26062369679164454,
+          "observed": 0.26666666666666666
+        },
+        {
+          "low": 0.4,
+          "high": 0.6000000000000001,
+          "n": 18,
+          "predicted": 0.4621530254616117,
+          "observed": 0.5555555555555556
+        },
+        {
+          "low": 0.6,
+          "high": 0.8,
+          "n": 3,
+          "predicted": 0.6805251151281931,
+          "observed": 0.6666666666666666
+        }
+      ],
+      "cohorts": [
+        {
+          "label": "Under $20m",
+          "low": 0,
+          "high": 20000000,
+          "n": 459,
+          "hits": 188,
+          "probability": 0.4103671706263499
+        },
+        {
+          "label": "$20m\u2013$75m",
+          "low": 20000000,
+          "high": 75000000,
+          "n": 524,
+          "hits": 108,
+          "probability": 0.20833333333333334
+        },
+        {
+          "label": "$75m+",
+          "low": 75000000,
+          "high": null,
+          "n": 205,
+          "hits": 36,
+          "probability": 0.18181818181818182
+        }
+      ]
+    }
+  }
+}

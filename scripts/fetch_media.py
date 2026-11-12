@@ -1,0 +1,85 @@
+"""Cache small reference images plus attribution metadata from Wikipedia / Commons."""
+import hashlib
+import json
+from pathlib import Path
+import time
+import urllib.parse
+import urllib.error
+from fetch_sources import fetch
+
+ROOT = Path(__file__).resolve().parents[1]
+ASSETS = ROOT / 'public/assets'
+SUBJECTS = {
+    'inception': 'Inception', 'bridesmaids': 'Bridesmaids_(2011_film)',
+    'moneyball': 'Moneyball_(film)', 'social-network': 'The_Social_Network',
+    'pacific-rim': 'Pacific_Rim_(film)', 'john-carter': 'John_Carter_(film)',
+    'lone-ranger': 'The_Lone_Ranger_(2013_film)', 'gravity': 'Gravity_(2013_film)',
+    'hunger-games': 'The_Hunger_Games_(film)', 'catching-fire': 'The_Hunger_Games:_Catching_Fire',
+    'iron-man-3': 'Iron_Man_3', 'world-war-z': 'World_War_Z_(film)',
+    'district-9': 'District_9', 'hangover': 'The_Hangover', 'hugo': 'Hugo_(film)',
+    'super-8': 'Super_8_(2011_film)', 'war-worlds': 'War_of_the_Worlds_(2005_film)',
+    'avengers': 'The_Avengers_(2012_film)',
+    'sherry-lansing': 'Sherry_Lansing', 'brad-grey': 'Brad_Grey',
+    'rich-ross': 'Rich_Ross', 'alan-horn': 'Alan_F._Horn',
+}
+
+def main():
+    ASSETS.mkdir(parents=True, exist_ok=True)
+    manifest_path = ASSETS / 'manifest.json'
+    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    for slug, title in SUBJECTS.items():
+        if slug in manifest and (ROOT/'public'/manifest[slug]['path']).exists():
+            continue
+        page = 'https://en.wikipedia.org/wiki/' + urllib.parse.quote(title)
+        try:
+            time.sleep(1.5)
+            summary_url = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + urllib.parse.quote(title)
+            try:
+                summary_raw = fetch(summary_url)
+            except urllib.error.HTTPError as error:
+                if error.code != 429:
+                    raise
+                time.sleep(min(20, max(5, int(error.headers.get('Retry-After', 5)))))
+                summary_raw = fetch(summary_url)
+            summary = json.loads(summary_raw)
+            thumbnail = summary.get('thumbnail')
+            if not thumbnail:
+                raise ValueError('No thumbnail provided by the source')
+            url = thumbnail['source'].split('?')[0]
+            try:
+                raw = fetch(url)
+            except urllib.error.HTTPError as error:
+                if error.code != 429:
+                    raise
+                time.sleep(min(20, max(5, int(error.headers.get('Retry-After', 5)))))
+                raw = fetch(url)
+            ext = '.png' if raw[:8] == b'\x89PNG\r\n\x1a\n' else '.jpg'
+            filename = slug + ext
+            (ASSETS / filename).write_bytes(raw)
+            original = summary.get('originalimage', {}).get('source', url).split('?')[0]
+            file_title = urllib.parse.unquote(original.rsplit('/', 1)[-1])
+            is_commons = '/commons/' in original
+            file_page = ('https://commons.wikimedia.org/wiki/File:' if is_commons else 'https://en.wikipedia.org/wiki/File:') + urllib.parse.quote(file_title)
+            item = {'path': 'assets/' + filename, 'page': page, 'url': url, 'filePage': file_page,
+                    'title': summary.get('title', title), 'width': thumbnail.get('width'), 'height': thumbnail.get('height'),
+                    'retrieved': '2026-11-12', 'sha256': hashlib.sha256(raw).hexdigest(),
+                    'credit': 'Poster artwork © respective rights holders; source: Wikipedia.' if not is_commons else 'Wikimedia Commons; see individual file license and author.',
+                    'kind': 'commons_photo' if is_commons else 'copyrighted_poster'}
+            if is_commons:
+                query = urllib.parse.urlencode({'action':'query', 'format':'json', 'prop':'imageinfo', 'iiprop':'extmetadata', 'titles':'File:'+file_title})
+                try:
+                    meta = json.loads(fetch('https://commons.wikimedia.org/w/api.php?' + query))
+                    pages = list(meta['query']['pages'].values())
+                    item['licenseMetadata'] = pages[0]['imageinfo'][0]['extmetadata']
+                except Exception as error:
+                    item['metadataError'] = str(error)
+            manifest[slug] = item
+            print(slug, filename, len(raw), item['kind'])
+        except Exception as error:
+            print('UNAVAILABLE', slug, str(error))
+        time.sleep(.1)
+    (ASSETS / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
+    (ASSETS / 'manifest.js').write_text('window.LabMedia = ' + json.dumps(manifest,ensure_ascii=False,separators=(',',':')) + ';\n')
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,22 @@
+{
+  "retrieved": "2026-11-12",
+  "publisher": "FiveThirtyEight",
+  "commit": null,
+  "files": {
+    "movies.csv": {
+      "url": "https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/movies.csv",
+      "sha256": "69310a39f8b318450d48cd08a7060de37a5185ca1870ce4194418e2092d392c4",
+      "bytes": 207689
+    },
+    "README-upstream.md": {
+      "url": "https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/README.md",
+      "sha256": "4fca3ee6bc2c24522c033ad9fa58f7b5b5ca373bc84554733d71f098c66fa6c5",
+      "bytes": 234
+    },
+    "LICENSE-upstream.txt": {
+      "url": "https://raw.githubusercontent.com/fivethirtyeight/data/master/LICENSE",
+      "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+      "bytes": 18650
+    }
+  }
+}
