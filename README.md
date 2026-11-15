@@ -10,6 +10,28 @@ An entertainment-focused COMM 502 prototype: five movie forecasts, an outcome re
 
 I shaped the questions and use cases, connected them to communication coursework, and iterated the experience through design and functionality reviews. I developed the prototype with AI assistance for research, implementation, debugging, and test development. Data sources, methods, and validation commands are available for inspection. No user study has established a learning or engagement benefit.
 
+## Where I’m taking the project next
+
+Hollywood Luck Lab is an initial working prototype, and there is much more I want to build. The current version is a starting point for exploring how entertainment data, machine learning, and communication can work together.
+
+**These plans depend on the data I can collect from publicly accessible internet sources, including downloadable datasets, available APIs, and web scraping where feasible.** Coverage, historical depth, consistency, and access will shape which questions I can investigate meaningfully. I’m starting with the evidence I can obtain, documenting its gaps, and refining the scope as I learn what it can support.
+
+### Current focus
+
+- **Expand the data and improve the models.** Collect richer film metadata and historical context, investigate missing information, and compare additional features against existing baselines. The aim is to improve predictive performance and probability calibration, checking whether any improvement holds on genuinely new data.
+
+- **Make the Data Room more explanatory.** Add ways to inspect features, their relationship to model estimates, and the reliability of predicted probabilities. I want to connect the statistical explanation to a practical question: what does this information actually tell us about a film’s likely performance? Feature associations and model sensitivities will be distinguished from causal explanations.
+
+### Planned explorations
+
+- **Explore film content through NLP.** As suitable scripts become publicly available, investigate representations of themes, narrative structure, dialogue, and other content characteristics. Explore whether content-derived features add useful information to performance models or support more relevant content ranking. Performance prediction and recommendation ranking are separate evaluation questions.
+
+- **Investigate theatrical-to-streaming release windows.** Explore how a film’s characteristics, theatrical trajectory, and release context relate to the timing of its streaming debut. Start with descriptive analysis and forecasting, then assess whether the available evidence supports recommendations about release timing rather than assuming an optimal window can be identified.
+
+- **Forecast weekly streaming Top 10 outcomes.** Investigate whether historical chart trajectories, release schedules, content features, and other public signals can help predict which films and TV shows enter or remain in a platform’s weekly Top 10. Define the platform, market, week, and chart measure explicitly, depending on the records available.
+
+These are directions I want to explore, rather than promised features. I’ll prioritize those supported by sufficiently reliable public data and distinguish exploratory findings from validated results. New capabilities will be documented alongside their evaluation and limitations.
+
 ## Public deployment
 
 GitHub Pages publishes only `public/` through `.github/workflows/pages.yml` when `main` changes. The workflow verifies probability logic, retained simulation logic, local links, and portfolio dataset counts before deployment. The source repository also contains the Python pipeline, tests, and documented source snapshots. Coursework assignments are kept in separate repositories.
