@@ -1,6 +1,22 @@
 # Hollywood Luck Lab
 
+**[Project overview and public demo](https://kv304.github.io/hollywood-luck-lab/portfolio.html)** · [Open the lab](https://kv304.github.io/hollywood-luck-lab/index.html) · [Methodology](https://kv304.github.io/hollywood-luck-lab/methodology.html) · [One-page work sample](https://kv304.github.io/hollywood-luck-lab/work-sample/Karan_Verma_Hollywood_Luck_Lab_Work_Sample.pdf)
+
+**Karan Verma · USC COMM 502 · Working prototype.** The central product question is how to make film-performance evidence and uncertainty understandable through interaction. This portfolio demonstrates an inspectable product and modeling workflow; the observed predictive gain is modest and uncertain.
+
 An entertainment-focused COMM 502 prototype: five movie forecasts, an outcome reveal, real posters and executive portraits, eight historical case files, a browsable career dataset, and inspectable model comparisons. Runs as a static site with no API key, framework, account, or backend.
+
+## Contribution and AI assistance
+
+I shaped the questions and use cases, connected them to communication coursework, and iterated the experience through design and functionality reviews. I developed the prototype with AI assistance for research, implementation, debugging, and test development. Data sources, methods, and validation commands are available for inspection. No user study has established a learning or engagement benefit.
+
+## Public deployment
+
+GitHub Pages publishes only `public/` through `.github/workflows/pages.yml` when `main` changes. The workflow verifies probability logic, retained simulation logic, local links, and portfolio dataset counts before deployment. The source repository also contains the Python pipeline, tests, and documented source snapshots. Coursework assignments are kept in separate repositories.
+
+The portfolio entry point is `portfolio.html`; `index.html` remains the playable lab. All local assets use relative paths so they work under the repository URL prefix. No login or runtime API key is required. Some external artwork and optional fonts require a network connection.
+
+The brief is built with `python3 scripts/build_work_sample.py` using ReportLab (an optional document dependency, separate from model requirements). It writes `output/pdf/` and a deployable copy under `public/work-sample/`. The included screenshot is captured from the working game. Pass `--site` and `--repo` to update its clickable URLs when moving the project.
 
 ## Run
 
@@ -42,6 +58,7 @@ Scoring uses `100 * (1 - (forecast_probability - binary_outcome)^2)` per film. T
 - `node tests/forecast.test.cjs`: verifies all 1,614 legacy baseline probabilities independently in JavaScript; checks score endpoints, invalid inputs, shuffle, and Wilson intervals.
 - `.venv/bin/python tests/test_research.py`: independently refits selected richer models, verifies displayed metrics and explanation sensitivities, tests future-outcome exclusion and validation cutoffs, threshold ordering, earlier comparables, joins, and career aggregates.
 - `node tests/simulation.test.cjs`: checks the retained original sandbox's random streams and tie treatment.
+- `python3 scripts/check_public_site.py`: checks deployable relative links, the work-sample PDF, and portfolio counts against exported data. Forecast checks also verify calibration-band boundaries and membership for every film/target estimate.
 
 Browser QA covers a five-round run, model help, slider updates, scoring, replay, blind mode, export activation, archive search, changing targets, detail dialogs, executive dossier reveals, source panels, and a 390-pixel responsive layout. See the changelog for limitations.
 

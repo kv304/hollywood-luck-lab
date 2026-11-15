@@ -27,7 +27,11 @@
     const margin=z*Math.sqrt(p*(1-p)/n+z*z/(4*n*n))/d;
     return [center-margin,center+margin];
   }
-  const api={probability,score,shuffle,wilson};
+  function calibrationBand(bins, p) {
+    if (!Number.isFinite(p) || p < 0 || p > 1) throw new RangeError('Invalid probability.');
+    return bins.find(bin=>p>=bin.low && (p<bin.high || (bin.high===1 && p===1))) || null;
+  }
+  const api={probability,score,shuffle,wilson,calibrationBand};
   if(typeof module!=='undefined' && module.exports) module.exports=api;
   else root.ForecastLab=api;
 })(typeof window!=='undefined'?window:globalThis);

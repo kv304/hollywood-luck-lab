@@ -34,6 +34,14 @@ Limits: retrospectively assembled, selected historical records; final credits an
 
 Scale career-chart bars to the films currently shown and label that scale. Previously an early-career outlier could shrink every bar in the latest-12 view even though that outlier was not visible. Showing all films restores the full-career scale. This changes presentation only; records, aggregates, probabilities, and model metrics are unchanged. Saved separately from v0.3.0.
 
+## v0.4.0 — Public portfolio and probability interpretation — November 15, 2026
+
+Add a recruiter-facing project overview, a readable methodology page, and a one-page PDF with a real interface screenshot and clickable demo/code/methodology links. Explain implemented features, engineering, contribution and AI assistance, proposed next steps, and the limits of the historical evidence. Link the overview and methodology from the playable lab. Prepare GitHub Pages deployment of only the static public directory, with automated logic and local-link checks.
+
+Add a per-film reliability disclosure: compare the relevant forecast band's average prediction with the observed rate and sample size on the same historical evaluation sample. Explain that these descriptive groups are neither independent validation nor a per-film confidence interval. Outcome reveals now explain why one result cannot validate a probability. Probability values, model training, and evaluation metrics are unchanged.
+
+Validation: original model checks, independent richer-model refits and leakage/explanation checks, JavaScript probability/calibration-band and simulation checks, portable asset/link checks, browser checks of reliability disclosures and outcome guidance, responsive portfolio review, and a rendered one-page PDF inspection. Earlier saved versions remain available.
+
 ## Restore or inspect a version
 
 Every working milestone receives a Git tag and a ZIP. To inspect without replacing current work, extract the desired ZIP into a separate folder and serve its `public` directory. To restore a milestone into a new Git branch after saving current changes, use `git switch -c restore-v0.1.0 v0.1.0`. Do not use a hard reset. The version selector in the site links the playable original; ZIP files preserve the exact full source of each milestone.

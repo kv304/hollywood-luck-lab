@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 artifacts/
+output/
+tmp/
 __pycache__/
 *.pyc
 .venv/
